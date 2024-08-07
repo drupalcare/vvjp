@@ -1,0 +1,48 @@
+vvjp:
+  version: VERSION
+  css:
+    theme:
+      css/vvjp.css: { }
+  js:
+    js/vvjp.js: {}
+  dependencies:
+    - core/drupal
+    - core/drupal.ajax
+    - core/drupalSettings
+    - core/once
+
+vvjp-style:
+  version: VERSION
+  css:
+    theme:
+      css/vvjp-style.css: { }
+
+vvjp__576:
+  version: VERSION
+  css:
+    theme:
+      css/vvjp-576.css: { weight: 202 }
+
+vvjp__768:
+  version: VERSION
+  css:
+    theme:
+      css/vvjp-768.css: { weight: 202 }
+
+vvjp__992:
+  version: VERSION
+  css:
+    theme:
+      css/vvjp-992.css: { weight: 202 }
+
+vvjp__1200:
+  version: VERSION
+  css:
+    theme:
+      css/vvjp-1200.css: { weight: 202 }
+
+vvjp__1400:
+  version: VERSION
+  css:
+    theme:
+      css/vvjp-1400.css: { weight: 202 }

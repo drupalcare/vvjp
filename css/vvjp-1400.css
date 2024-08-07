@@ -1,0 +1,22 @@
+/**
+ * @file
+ * Views Parallax
+ *
+ * Filename:     vvjp-1400.css
+ * Website:      https://www.flashwebcenter.com
+ * Developer:    Alaa Haddad https://www.alaahaddad.com.
+ */
+
+@media (max-width: 87.5rem) {
+  .parallax-row {
+    overflow: visible;
+  }
+
+  .parallax-background,
+  .parallax-content {
+    transform: none !important;
+    transition: none !important;
+    filter: none !important;
+    box-shadow: none !important;
+  }
+}
