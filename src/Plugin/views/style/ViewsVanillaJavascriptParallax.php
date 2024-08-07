@@ -39,7 +39,7 @@ class ViewsVanillaJavascriptParallax extends StylePluginBase {
     $options['overlay_opacity'] = ['default' => 0.3];
     $options['section_height'] = ['default' => 75];
     $options['available_breakpoints'] = ['default' => ['none']];
-    $options['bg_animation_easing'] = ['default' => 'ease-in-out'];
+    $options['bg_animation_easing'] = ['default' => 'ease'];
     $options['bg_animation_speed'] = ['default' => 0.5];
     $options['enable_css'] = ['default' => TRUE];
     $options['scroll_effect'] = ['default' => 'fade'];

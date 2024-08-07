@@ -40,7 +40,7 @@
           const speed = parseFloat(element.getAttribute('data-parallax-speed')) || 0.5;
           const effect = element.getAttribute('data-parallax-effect') || 'translate';
           const elementRect = element.getBoundingClientRect();
-          const elementTop = elementRect.top + window.pageYOffset;
+          const elementTop = elementRect.top + scrollPosition;
           const elementHeight = element.offsetHeight;
 
           if (scrollPosition + windowHeight > elementTop && scrollPosition < elementTop + elementHeight) {
@@ -82,6 +82,7 @@
               }
             }
           } else {
+            const content = element.querySelector('.parallax-content');
             if (content) {
               content.classList.remove('visible'); // Remove visible class when out of view
             }
