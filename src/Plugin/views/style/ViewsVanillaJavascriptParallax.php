@@ -57,6 +57,12 @@ class ViewsVanillaJavascriptParallax extends StylePluginBase {
   public function buildOptionsForm(&$form, FormStateInterface $form_state) {
     parent::buildOptionsForm($form, $form_state);
 
+    // Add a warning message at the top of the settings form.
+    $form['warning_message'] = [
+      '#type' => 'markup',
+      '#markup' => '<div class="messages messages--warning">' . $this->t('Note: The first field must be an image, and you should choose the image URL field.') . '</div>',
+    ];
+
     // Parallax speed configuration.
     $form['parallax_speed'] = [
       '#type' => 'number',
