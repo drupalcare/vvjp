@@ -60,7 +60,7 @@ class ViewsVanillaJavascriptParallax extends StylePluginBase {
     // Add a warning message at the top of the settings form.
     $form['warning_message'] = [
       '#type' => 'markup',
-      '#markup' => '<div class="messages messages--warning">' . $this->t('Note: The first field must be an image, and you should choose the image URL field.') . '</div>',
+      '#markup' => '<div class="messages messages--warning">' . $this->t('Note: The first field must be an image, and you should choose the "URL to image" option under Formatter in the field configuration. The module comes with an example view named vvjp_example that you can check for reference.') . '</div>',
     ];
 
     // Parallax speed configuration.
