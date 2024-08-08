@@ -253,7 +253,7 @@ class ViewsVanillaJavascriptParallax extends StylePluginBase {
   public function validate() {
     $errors = parent::validate();
     if (!$this->usesFields()) {
-      $errors[] = $this->t('Views Parallax requires Fields as row style');
+      $errors[] = $this->t('Views Parallax requires Fields as row style and the first field must be an image, and you should choose the "URL to image" option under Formatter in the field configuration.');
     }
     return $errors;
   }
