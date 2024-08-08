@@ -113,6 +113,10 @@ function template_preprocess_views_view_vvjp(array &$variables) {
     $list_attributes['data-scroll-effect'] = $handler->options['scroll_effect'];
   }
 
+  if (!empty($handler->options['disable_overlay'])) {
+    $list_attributes['data-disable-overlay'] = $handler->options['disable_overlay'] ? 'true' : 'false';
+  }
+
   // Calculate and pass the background_rgb variable to the template.
   if (!empty($handler->options['overlay_color'])) {
     $rgb = _vvjc_hex_to_rgb($handler->options['overlay_color']);

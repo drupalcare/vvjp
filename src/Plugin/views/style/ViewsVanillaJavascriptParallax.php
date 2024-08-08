@@ -43,6 +43,7 @@ class ViewsVanillaJavascriptParallax extends StylePluginBase {
     $options['bg_animation_speed'] = ['default' => 0.5];
     $options['enable_css'] = ['default' => TRUE];
     $options['scroll_effect'] = ['default' => 'fade'];
+    $options['disable_overlay'] = ['default' => FALSE];
     return $options;
   }
 
@@ -63,12 +64,47 @@ class ViewsVanillaJavascriptParallax extends StylePluginBase {
       '#markup' => '<div class="messages messages--warning">' . $this->t('Note: The first field must be an image, and you should choose the "URL to image" option under Formatter in the field configuration. The module comes with an example view named vvjp_example that you can check for reference.') . '</div>',
     ];
 
+    // Responsive breakpoints configuration.
+    $form['available_breakpoints'] = [
+      '#type' => 'select',
+      '#title' => $this->t('Available Breakpoints for Parallax'),
+      '#options' => [
+        'none' => $this->t('Active on all screens'),
+        '576' => $this->t('576px / 36rem'),
+        '768' => $this->t('768px / 48rem'),
+        '992' => $this->t('992px / 62rem'),
+        '1200' => $this->t('1200px / 75rem'),
+        '1400' => $this->t('1400px / 87.5rem'),
+      ],
+      '#default_value' => $this->options['available_breakpoints'],
+      '#description' => $this->t('Select the maximum screen width (in pixels) at which the parallax effect should be disabled. Selecting "none" will keep the parallax effect active on all screen sizes.'),
+    ];
+
+    // Section height configuration.
+    $form['section_height'] = [
+      '#type' => 'number',
+      '#title' => $this->t('Section Height (vh)'),
+      '#default_value' => $this->options['section_height'],
+      '#description' => $this->t('Define the height of the parallax section in viewport height units.'),
+    ];
+
     // Parallax speed configuration.
     $form['parallax_speed'] = [
       '#type' => 'number',
       '#title' => $this->t('Parallax Speed'),
       '#default_value' => $this->options['parallax_speed'],
       '#description' => $this->t('Set the speed of the parallax effect (e.g., 0.1 for slow, 2 for fast).'),
+      '#step' => 0.1,
+      '#min' => 0.1,
+      '#max' => 2,
+    ];
+
+    // Background animation speed configuration.
+    $form['bg_animation_speed'] = [
+      '#type' => 'number',
+      '#title' => $this->t('Background Animation Speed'),
+      '#default_value' => $this->options['bg_animation_speed'],
+      '#description' => $this->t('Set the speed of the Background Animation Speed (e.g., 0.1 for slow, 2 for fast).'),
       '#step' => 0.1,
       '#min' => 0.1,
       '#max' => 2,
@@ -87,40 +123,6 @@ class ViewsVanillaJavascriptParallax extends StylePluginBase {
       ],
       '#default_value' => $this->options['background_position'],
       '#description' => $this->t('Set the position of the background image.'),
-    ];
-
-    // Overlay color configuration.
-    $form['overlay_color'] = [
-      '#type' => 'color',
-      '#title' => $this->t('Overlay Color'),
-      '#default_value' => $this->options['overlay_color'],
-      '#description' => $this->t('Choose a color overlay for the parallax background.'),
-    ];
-
-    // Overlay opacity configuration.
-    $form['overlay_opacity'] = [
-      '#type' => 'range',
-      '#title' => $this->t('Overlay Opacity'),
-      '#default_value' => $this->options['overlay_opacity'],
-      '#min' => 0,
-      '#max' => 1,
-      '#step' => 0.1,
-      '#description' => $this->t('Set the opacity level for the overlay.'),
-      '#suffix' => '<span id="overlay-opacity-value">' . $this->options['overlay_opacity'] . '</span>',
-      '#attributes' => [
-        'oninput' => 'document.getElementById("overlay-opacity-value").innerText = this.value;',
-      ],
-    ];
-
-    // Background animation speed configuration.
-    $form['bg_animation_speed'] = [
-      '#type' => 'number',
-      '#title' => $this->t('Background Animation Speed'),
-      '#default_value' => $this->options['bg_animation_speed'],
-      '#description' => $this->t('Set the speed of the Background Animation Speed (e.g., 0.1 for slow, 2 for fast).'),
-      '#step' => 0.1,
-      '#min' => 0.1,
-      '#max' => 2,
     ];
 
     // Background animation easing configuration.
@@ -159,12 +161,34 @@ class ViewsVanillaJavascriptParallax extends StylePluginBase {
       '#description' => $this->t('Choose the scroll effect for the parallax content.'),
     ];
 
-    // Section height configuration.
-    $form['section_height'] = [
-      '#type' => 'number',
-      '#title' => $this->t('Section Height (vh)'),
-      '#default_value' => $this->options['section_height'],
-      '#description' => $this->t('Define the height of the parallax section in viewport height units.'),
+    // Overlay color configuration.
+    $form['overlay_color'] = [
+      '#type' => 'color',
+      '#title' => $this->t('Overlay Color'),
+      '#default_value' => $this->options['overlay_color'],
+      '#description' => $this->t('Choose a color overlay for the parallax background.'),
+    ];
+
+    // Overlay opacity configuration.
+    $form['overlay_opacity'] = [
+      '#type' => 'range',
+      '#title' => $this->t('Overlay Opacity'),
+      '#default_value' => $this->options['overlay_opacity'],
+      '#min' => 0,
+      '#max' => 1,
+      '#step' => 0.1,
+      '#description' => $this->t('Set the opacity level for the overlay.'),
+      '#suffix' => '<span id="overlay-opacity-value">' . $this->options['overlay_opacity'] . '</span>',
+      '#attributes' => [
+        'oninput' => 'document.getElementById("overlay-opacity-value").innerText = this.value;',
+      ],
+    ];
+
+    $form['disable_overlay'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('Disable Overlay Color'),
+      '#default_value' => $this->options['disable_overlay'],
+      '#description' => $this->t('Check this to disable overlay color completely.'),
     ];
 
     // Enable CSS library configuration.
@@ -175,21 +199,6 @@ class ViewsVanillaJavascriptParallax extends StylePluginBase {
       '#description' => $this->t('Check this box to include the CSS library for styling the parallax.'),
     ];
 
-    // Responsive breakpoints configuration.
-    $form['available_breakpoints'] = [
-      '#type' => 'select',
-      '#title' => $this->t('Available Breakpoints for Parallax'),
-      '#options' => [
-        'none' => $this->t('Active on all screens'),
-        '576' => $this->t('576px / 36rem'),
-        '768' => $this->t('768px / 48rem'),
-        '992' => $this->t('992px / 62rem'),
-        '1200' => $this->t('1200px / 75rem'),
-        '1400' => $this->t('1400px / 87.5rem'),
-      ],
-      '#default_value' => $this->options['available_breakpoints'],
-      '#description' => $this->t('Select the maximum screen width (in pixels) at which the parallax effect should be disabled. Selecting "none" will keep the parallax effect active on all screen sizes.'),
-    ];
   }
 
   /**
@@ -253,7 +262,7 @@ class ViewsVanillaJavascriptParallax extends StylePluginBase {
   public function validate() {
     $errors = parent::validate();
     if (!$this->usesFields()) {
-      $errors[] = $this->t('Views Parallax requires Fields as row style and the first field must be an image, and you should choose the "URL to image" option under Formatter in the field configuration.');
+      $errors[] = $this->t('Views Parallax requires Fields as row style');
     }
     return $errors;
   }

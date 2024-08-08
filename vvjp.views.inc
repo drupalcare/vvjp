@@ -96,6 +96,13 @@ function vvjp_views_data_alter(array &$data): void {
           'id' => 'boolean',
         ],
       ],
+      'disable_overlay' => [
+        'title' => t('Disable Overlay Color'),
+        'help' => t('Enable or disable the overlay color completely.'),
+        'field' => [
+          'id' => 'boolean',
+        ],
+      ],
 
     ],
   ];
