@@ -119,7 +119,7 @@ function template_preprocess_views_view_vvjp(array &$variables) {
 
   // Calculate and pass the background_rgb variable to the template.
   if (!empty($handler->options['overlay_color'])) {
-    $rgb = _vvjc_hex_to_rgb($handler->options['overlay_color']);
+    $rgb = _vvjp_hex_to_rgb($handler->options['overlay_color']);
     $opacity = $handler->options['overlay_opacity'] ?? 1;
     $background_rgb = "rgba({$rgb['r']}, {$rgb['g']}, {$rgb['b']}, $opacity)";
     $variables['background_rgb'] = $background_rgb;
@@ -194,17 +194,15 @@ function template_preprocess_views_view_vvjp_fields(array &$variables) {
 }
 
 /**
- * Converts a hex color code and opacity to an RGBA color.
+ * Helper function to convert hex color to RGB.
  *
  * @param string $hex
  *   The hex color code.
- * @param float $opacity
- *   The opacity value (0 to 1).
  *
- * @return string
- *   The RGBA color string.
+ * @return array
+ *   An associative array with 'r', 'g', 'b' values.
  */
-function _vvjp_hex_to_rgba(string $hex, float $opacity): string {
+function _vvjp_hex_to_rgb(string $hex): array {
   $hex = ltrim($hex, '#');
 
   // Handle short hex format (e.g., #123)
@@ -212,9 +210,10 @@ function _vvjp_hex_to_rgba(string $hex, float $opacity): string {
     $hex = $hex[0] . $hex[0] . $hex[1] . $hex[1] . $hex[2] . $hex[2];
   }
 
-  $r = hexdec(substr($hex, 0, 2));
-  $g = hexdec(substr($hex, 2, 2));
-  $b = hexdec(substr($hex, 4, 2));
-
-  return "rgba($r, $g, $b, $opacity)";
+  return [
+    'r' => hexdec(substr($hex, 0, 2)),
+    'g' => hexdec(substr($hex, 2, 2)),
+    'b' => hexdec(substr($hex, 4, 2)),
+  ];
 }
+

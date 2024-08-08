@@ -4,6 +4,7 @@ namespace Drupal\vvjp\Plugin\views\style;
 
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\views\Plugin\views\style\StylePluginBase;
+use Drupal\Core\Url;
 
 /**
  * Style plugin to render items in Parallax using vanilla JavaScript.
@@ -58,11 +59,13 @@ class ViewsVanillaJavascriptParallax extends StylePluginBase {
   public function buildOptionsForm(&$form, FormStateInterface $form_state) {
     parent::buildOptionsForm($form, $form_state);
 
-    // Add a warning message at the top of the settings form.
-    $form['warning_message'] = [
-      '#type' => 'markup',
-      '#markup' => '<div class="messages messages--warning">' . $this->t('Note: The first field must be an image, and you should choose the "URL to image" option under Formatter in the field configuration. The module comes with an example view named vvjp_example that you can check for reference.') . '</div>',
-    ];
+    // Add a warning message if the first field is not set to "URL to image".
+    if (!$this->isFirstFieldUrlToImage()) {
+      $form['warning_message'] = [
+        '#type' => 'markup',
+        '#markup' => '<div class="messages messages--error">' . $this->t('Note: The first field must be an image, and you should choose the "URL to image" option under Formatter in the field configuration. To see an example, check the vvjp_example view by clicking <a href="/admin/structure/views/view/vvjp_example" style="display: inline;">here</a> to edit it.', ['@url' => Url::fromRoute('entity.view.edit_form', ['view' => 'vvjp_example'])->toString()]) . '</div>',
+      ];
+    }
 
     // Responsive breakpoints configuration.
     $form['available_breakpoints'] = [
@@ -264,7 +267,34 @@ class ViewsVanillaJavascriptParallax extends StylePluginBase {
     if (!$this->usesFields()) {
       $errors[] = $this->t('Views Parallax requires Fields as row style');
     }
+
+    // Check if the first field is not set to "URL to image".
+    if (!$this->isFirstFieldUrlToImage()) {
+      // Generate the URL to the view edit form.
+      $link = Url::fromRoute('entity.view.edit_form', ['view' => $this->view->storage->id()])->toString();
+      \Drupal::messenger()->addError($this->t('Note: The first field must be an image, and you should choose the "URL to image" option under Formatter in the field configuration. To see an example, check the view by clicking <a href="/admin/structure/views/view/vvjp_example" style="display: inline;">here</a> to edit it.', ['@url' => $link]));
+    }
     return $errors;
+  }
+
+  /**
+   * Check if the first field is set to "URL to image".
+   *
+   * @return bool
+   *   TRUE if the first field is set to "URL to image", FALSE otherwise.
+   */
+  private function isFirstFieldUrlToImage() {
+    // Get the fields in the display.
+    $fields = $this->view->display_handler->getOption('fields');
+    if (is_array($fields) && !empty($fields)) {
+      // Get the first field.
+      $first_field = reset($fields);
+      // Check if the first field's type is "image_url".
+      if (isset($first_field['type']) && $first_field['type'] === 'image_url') {
+        return TRUE;
+      }
+    }
+    return FALSE;
   }
 
 }
