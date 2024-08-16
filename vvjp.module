@@ -117,6 +117,10 @@ function template_preprocess_views_view_vvjp(array &$variables) {
     $list_attributes['data-disable-overlay'] = $handler->options['disable_overlay'] ? 'true' : 'false';
   }
 
+  if (!empty($handler->options['over_content_only'])) {
+    $list_attributes['data-over-content-only'] = $handler->options['over_content_only'] ? 'true' : 'false';
+  }
+
   // Calculate and pass the background_rgb variable to the template.
   if (!empty($handler->options['overlay_color'])) {
     $rgb = _vvjp_hex_to_rgb($handler->options['overlay_color']);
@@ -129,8 +133,15 @@ function template_preprocess_views_view_vvjp(array &$variables) {
     $variables['background_rgb'] = NULL;
   }
 
-  if (!empty($handler->options['section_height'])) {
-    $list_attributes['data-section-height'] = $handler->options['section_height'];
+  // Process the section height as a combined value (e.g., "75vh").
+  if (!empty($handler->options['section_height']['value']) && !empty($handler->options['section_height']['unit'])) {
+    $unit = $handler->options['section_height']['unit'];
+    $section_height = $handler->options['section_height']['value'] . $unit;
+    $variables['section_height'] = $section_height;
+  }
+  else {
+    // Default value if not set.
+    $variables['section_height'] = '100vh';
   }
 
   if (!empty($handler->options['available_breakpoints'])) {
@@ -160,10 +171,12 @@ function template_preprocess_views_view_vvjp(array &$variables) {
     'scroll_effect' => $handler->options['scroll_effect'],
     'overlay_color' => $handler->options['overlay_color'],
     'overlay_opacity' => $handler->options['overlay_opacity'],
-    'section_height' => $handler->options['section_height'],
+  // Combine value and unit for section height.
+    'section_height' => $section_height,
     'available_breakpoints' => $handler->options['available_breakpoints'],
     'bg_animation_easing' => $handler->options['bg_animation_easing'],
     'enable_css' => $handler->options['enable_css'],
+    'over_content_only' => $handler->options['over_content_only'],
   ];
 
   // Customize theme hook suggestions for rows.
@@ -216,4 +229,3 @@ function _vvjp_hex_to_rgb(string $hex): array {
     'b' => hexdec(substr($hex, 4, 2)),
   ];
 }
-

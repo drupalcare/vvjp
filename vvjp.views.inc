@@ -56,9 +56,19 @@ function vvjp_views_data_alter(array &$data): void {
       ],
       'section_height' => [
         'title' => t('Section Height'),
-        'help' => t('Define the height of the parallax section in viewport height units.'),
+        'help' => t('Define the height of the parallax section.'),
         'field' => [
-          'id' => 'numeric',
+          'id' => 'array',
+          'schema' => [
+            'value' => [
+              'type' => 'numeric',
+              'description' => t('The numeric value for the height.'),
+            ],
+            'unit' => [
+              'type' => 'string',
+              'description' => t('The unit for the height (vh, px, %, em).'),
+            ],
+          ],
         ],
       ],
       'available_breakpoints' => [
@@ -103,7 +113,13 @@ function vvjp_views_data_alter(array &$data): void {
           'id' => 'boolean',
         ],
       ],
-
+      'over_content_only' => [
+        'title' => t('Apply Background Color for Content Only'),
+        'help' => t('Enable this option to apply the overlay background color only beneath the parallax content, rather than covering the entire row.'),
+        'field' => [
+          'id' => 'boolean',
+        ],
+      ],
     ],
   ];
 }

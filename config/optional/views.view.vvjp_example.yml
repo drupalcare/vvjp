@@ -208,16 +208,20 @@ display:
         type: views_vvjp
         options:
           grouping: {  }
-          parallax_speed: '0.7'
-          background_position: center
-          overlay_color: '#000000'
-          overlay_opacity: '0.3'
+          available_breakpoints: '576'
+          section_height:
+            value: '75'
+            unit: vh
+          parallax_speed: '0.6'
           bg_animation_speed: '0.5'
+          background_position: '50% 50%'
           bg_animation_easing: ease
           scroll_effect: fade
-          section_height: '75'
+          overlay_color: '#000000'
+          overlay_opacity: '0.3'
+          over_content_only: 1
+          disable_overlay: 0
           enable_css: 1
-          available_breakpoints: none
       row:
         type: fields
         options:

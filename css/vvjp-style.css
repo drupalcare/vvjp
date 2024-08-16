@@ -6,31 +6,12 @@
  * Website:      https://www.flashwebcenter.com
  * Developer:    Alaa Haddad https://www.alaahaddad.com.
  */
-
-/* Custom */
-
-/* Custom Optional Styles for Views Vanilla JavaScript Parallax */
-
-.parallax-row {
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
-}
-
-.parallax-row:hover {
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
-
 .parallax-background {
   filter: brightness(0.9);
 }
 
 .parallax-background:hover {
   filter: brightness(1.1);
-}
-
-.parallax-overlay {
-  border-radius: 10px;
 }
 
 .parallax-content {

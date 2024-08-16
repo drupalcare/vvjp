@@ -18,7 +18,7 @@
 {% set unique_id = options.unique_id %}
 {% set vvjp_id = 'vvjp-' ~ unique_id %}
 {% set parallax_inner_id = 'vvjp-inner-' ~ unique_id %}
-{% set js_breakpoint = breakpoint == 'none' ? 0 : breakpoint %}
+{% set breakpoints = options.available_breakpoints %}
 {# Initialize base classes array #}
 {% set classes = [
   'vvjp',
@@ -43,23 +43,29 @@
       {# Render each parallax row with background and content #}
       <div id="{{ vvjp_id ~ '-' ~ key }}"
            class="parallax-row {{ effect_class }}"
-           data-breakpoint="{{ js_breakpoint }}"
+           data-breakpoint="{{ breakpoints }}"
            data-parallax-speed="{{ options.parallax_speed }}"
-           data-parallax-effect="{{ options.parallax_effect }}"
-           style="height: {{ options.section_height }}vh;">
+           data-parallax-effect="{{ options.scroll_effect }}"
+           style="height: {{ section_height }};">
 
-        <div class="parallax-background" style="background-image: url('{{ image_field }}'); background-position: {{ options.background_position }}; background-size: cover; transition: transform {{ options.bg_animation_speed }}s {{ options.bg_animation_easing }};">
+        <div class="parallax-background"
+        style="background-image: url('{{ image_field }}');
+               background-position: {{ options.background_position }};
+               background-size: cover;
+               transition: transform {{ options.bg_animation_speed }}s {{ options.bg_animation_easing }};">
         </div>
 
-        {% if background_rgb and not options.disable_overlay %}
-        <div class="parallax-overlay"style="background-color:{{ background_rgb }}"></div>
+        {% if background_rgb and not options.disable_overlay and not options.over_content_only %}
+        <div class="parallax-overlay" style="background-color: {{ background_rgb }}"></div>
         {% endif %}
 
-        <div class="parallax-content">
+        <div class="parallax-content"{% if background_rgb and not options.disable_overlay and options.over_content_only %} style="background-color: {{ background_rgb }};"{% endif %}>
           {{ foreground_field|safe_html }}
         </div>
+
       </div>
     {% endfor %}
 
   </div> {# End of vvjp-inner #}
 </div> {# End of main wrapper #}
+

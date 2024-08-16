@@ -35,16 +35,22 @@ class ViewsVanillaJavascriptParallax extends StylePluginBase {
     $options = parent::defineOptions();
     $options['unique_id'] = ['default' => $this->generateUniqueId()];
     $options['parallax_speed'] = ['default' => 0.3];
-    $options['background_position'] = ['default' => 'center center'];
+    $options['background_position'] = ['default' => 'center'];
     $options['overlay_color'] = ['default' => '#000000'];
     $options['overlay_opacity'] = ['default' => 0.3];
-    $options['section_height'] = ['default' => 75];
+    $options['section_height'] = [
+      'default' => [
+        'value' => 75,
+        'unit' => 'vh',
+      ],
+    ];
     $options['available_breakpoints'] = ['default' => ['none']];
     $options['bg_animation_easing'] = ['default' => 'ease'];
     $options['bg_animation_speed'] = ['default' => 0.5];
     $options['enable_css'] = ['default' => TRUE];
     $options['scroll_effect'] = ['default' => 'fade'];
     $options['disable_overlay'] = ['default' => FALSE];
+    $options['over_content_only'] = ['default' => FALSE];
     return $options;
   }
 
@@ -72,7 +78,7 @@ class ViewsVanillaJavascriptParallax extends StylePluginBase {
       '#type' => 'select',
       '#title' => $this->t('Available Breakpoints for Parallax'),
       '#options' => [
-        'none' => $this->t('Active on all screens'),
+        'all' => $this->t('Active on all screens'),
         '576' => $this->t('576px / 36rem'),
         '768' => $this->t('768px / 48rem'),
         '992' => $this->t('992px / 62rem'),
@@ -83,12 +89,46 @@ class ViewsVanillaJavascriptParallax extends StylePluginBase {
       '#description' => $this->t('Select the maximum screen width (in pixels) at which the parallax effect should be disabled. Selecting "none" will keep the parallax effect active on all screen sizes.'),
     ];
 
-    // Section height configuration.
     $form['section_height'] = [
+    // Or 'fieldset' if you want a titled box around it.
+      '#type' => 'container',
+      '#title' => $this->t('Section Height'),
+      '#description' => $this->t('Define the height of the parallax section by entering a value and selecting a unit.'),
+      '#attributes' => [
+    // Optional, for styling or JS targeting.
+        'class' => ['section-height-wrapper'],
+      ],
+    ];
+
+    $section_height = $this->options['section_height'] ??
+    ['value' => 75, 'unit' => 'vh'];
+
+    $form['section_height']['value'] = [
       '#type' => 'number',
-      '#title' => $this->t('Section Height (vh)'),
-      '#default_value' => $this->options['section_height'],
-      '#description' => $this->t('Define the height of the parallax section in viewport height units.'),
+      '#title' => $this->t('Height Value'),
+      '#default_value' => $section_height['value'] ?? 75,
+      '#description' => $this->t('Enter the numeric value for the height.'),
+      '#attributes' => [
+    // Optional, for inline display.
+        'style' => 'width: 150px; display: inline-block;',
+      ],
+    ];
+
+    $form['section_height']['unit'] = [
+      '#type' => 'select',
+      '#title' => $this->t('Height Unit'),
+      '#default_value' => $section_height['unit'] ?? 'vh',
+      '#options' => [
+        'vh' => $this->t('Viewport Height (vh)'),
+        'px' => $this->t('Pixels (px)'),
+        '%' => $this->t('Percentage (%)'),
+        'em' => $this->t('Ems (em)'),
+      ],
+      '#attributes' => [
+      // Optional, for inline display.
+        'style' => 'width: 150px; display: inline-block;',
+      ],
+      '#description' => $this->t('Select the unit for the height.'),
     ];
 
     // Parallax speed configuration.
@@ -113,7 +153,6 @@ class ViewsVanillaJavascriptParallax extends StylePluginBase {
       '#max' => 2,
     ];
 
-    // Background position configuration.
     $form['background_position'] = [
       '#type' => 'select',
       '#title' => $this->t('Background Position'),
@@ -123,6 +162,19 @@ class ViewsVanillaJavascriptParallax extends StylePluginBase {
         'bottom' => $this->t('Bottom'),
         'left' => $this->t('Left'),
         'right' => $this->t('Right'),
+        'top left' => $this->t('Top Left'),
+        'top right' => $this->t('Top Right'),
+        'bottom left' => $this->t('Bottom Left'),
+        'bottom right' => $this->t('Bottom Right'),
+        'center top' => $this->t('Center Top'),
+        'center bottom' => $this->t('Center Bottom'),
+        '50% 50%' => $this->t('50% 50% (Center)'),
+        '0% 0%' => $this->t('0% 0% (Top Left)'),
+        '100% 100%' => $this->t('100% 100% (Bottom Right)'),
+        '30% 70%' => $this->t('30% 70%'),
+        '10px 20px' => $this->t('10px 20px'),
+        '100px 50%' => $this->t('100px 50%'),
+        'left 10%' => $this->t('Left 10%'),
       ],
       '#default_value' => $this->options['background_position'],
       '#description' => $this->t('Set the position of the background image.'),
@@ -187,6 +239,13 @@ class ViewsVanillaJavascriptParallax extends StylePluginBase {
       ],
     ];
 
+    $form['over_content_only'] = [
+      '#type' => 'checkbox',
+      '#title' => $this->t('Apply Overlay Background Under Content Only'),
+      '#default_value' => $this->options['over_content_only'],
+      '#description' => $this->t('Enable this option to apply the overlay background color only beneath the parallax content, rather than covering the entire row.'),
+    ];
+
     $form['disable_overlay'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Disable Overlay Color'),
@@ -242,7 +301,7 @@ class ViewsVanillaJavascriptParallax extends StylePluginBase {
     }
 
     // Conditionally include the CSS library based on the option.
-    if ($this->options['available_breakpoints'] != 'none') {
+    if ($this->options['available_breakpoints']) {
       // Include the vvjp-style library.
       $libraries[] = 'vvjp/vvjp__' . $this->options['available_breakpoints'];
     }

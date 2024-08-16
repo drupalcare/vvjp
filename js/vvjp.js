@@ -17,23 +17,49 @@
 
       // Function to update parallax elements based on scroll position
       const updateParallax = () => {
-        parallaxElements.forEach(element => {
-          const breakpoint = parseInt(element.getAttribute('data-breakpoint'), 10);
+        const viewportWidth = window.innerWidth || document.documentElement.clientWidth;
 
-          // Disable parallax if the window width is smaller than the breakpoint (and breakpoint is not zero)
-          const isMobile = breakpoint > 0 && window.innerWidth <= breakpoint;
+        parallaxElements.forEach(element => {
+          const breakpoint = element.getAttribute('data-breakpoint');
+
+          // Check if breakpoint is "all" and handle it
+          const isMobile = breakpoint !== 'all' && parseInt(breakpoint, 10) > 0 && viewportWidth <= parseInt(breakpoint, 10);
 
           if (isMobile) {
-            // Disable parallax on mobile by removing styles and stopping execution
+            // Disable parallax on mobile by hiding the background and adding a regular image
             const background = element.querySelector('.parallax-background');
+            const content = element.querySelector('.parallax-content');
+
             if (background) {
-              background.style.transform = 'none';
-              background.style.transition = 'none';
-              background.style.filter = 'none';
+              background.style.display = 'none'; // Hide the parallax background
+
+              // Insert a regular image if it doesn't already exist
+              if (!element.querySelector('img')) {
+                const img = document.createElement('img');
+                img.src = background.style.backgroundImage.slice(5, -2); // Extract the URL from background-image
+                img.alt = ''; // Optionally, add an alt attribute here
+                img.style.width = '100%';
+                img.style.height = 'auto';
+
+                element.insertBefore(img, content); // Insert the image before the content
+              }
             }
             return; // Exit the function early if mobile
+          } else {
+            // Handle the case where "all" is set or the screen is larger than the breakpoint
+            const background = element.querySelector('.parallax-background');
+            if (background) {
+              background.style.display = ''; // Show the parallax background
+            }
+
+            // Remove any regular image that was added for small screens
+            const img = element.querySelector('img');
+            if (img) {
+              img.remove();
+            }
           }
 
+          // The following logic applies the parallax effect on non-mobile screens
           const scrollPosition = window.pageYOffset;
           const windowHeight = window.innerHeight;
 
@@ -98,8 +124,18 @@
       // Listen to the scroll event and update parallax
       window.addEventListener('scroll', handleScroll);
 
+      // Handle window resize to update viewport width and parallax elements
+      const handleResize = () => {
+        updateParallax(); // Re-run parallax update to adjust images on resize
+      };
+
+      // Listen to the resize event and update parallax
+      window.addEventListener('resize', handleResize);
+
       // Initial call to position elements correctly
       updateParallax();
     }
   };
 })(Drupal, drupalSettings, once);
+
+
