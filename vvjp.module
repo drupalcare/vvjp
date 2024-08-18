@@ -121,6 +121,10 @@ function template_preprocess_views_view_vvjp(array &$variables) {
     $list_attributes['data-over-content-only'] = $handler->options['over_content_only'] ? 'true' : 'false';
   }
 
+  if (!empty($handler->options['max_width'])) {
+    $list_attributes['data-max-width'] = $handler->options['max_width'];
+  }
+
   // Calculate and pass the background_rgb variable to the template.
   if (!empty($handler->options['overlay_color'])) {
     $rgb = _vvjp_hex_to_rgb($handler->options['overlay_color']);
@@ -177,6 +181,7 @@ function template_preprocess_views_view_vvjp(array &$variables) {
     'bg_animation_easing' => $handler->options['bg_animation_easing'],
     'enable_css' => $handler->options['enable_css'],
     'over_content_only' => $handler->options['over_content_only'],
+    'max_width' => $handler->options['max_width'],
   ];
 
   // Customize theme hook suggestions for rows.

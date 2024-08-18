@@ -36,8 +36,8 @@ class ViewsVanillaJavascriptParallax extends StylePluginBase {
     $options['unique_id'] = ['default' => $this->generateUniqueId()];
     $options['parallax_speed'] = ['default' => 0.3];
     $options['background_position'] = ['default' => 'center'];
-    $options['overlay_color'] = ['default' => '#000000'];
-    $options['overlay_opacity'] = ['default' => 0.3];
+    $options['overlay_color'] = ['default' => '#ffffff'];
+    $options['overlay_opacity'] = ['default' => 0.7];
     $options['section_height'] = [
       'default' => [
         'value' => 75,
@@ -47,6 +47,7 @@ class ViewsVanillaJavascriptParallax extends StylePluginBase {
     $options['available_breakpoints'] = ['default' => ['none']];
     $options['bg_animation_easing'] = ['default' => 'ease'];
     $options['bg_animation_speed'] = ['default' => 0.5];
+    $options['max_width'] = ['default' => 0];
     $options['enable_css'] = ['default' => TRUE];
     $options['scroll_effect'] = ['default' => 'fade'];
     $options['disable_overlay'] = ['default' => FALSE];
@@ -87,6 +88,15 @@ class ViewsVanillaJavascriptParallax extends StylePluginBase {
       ],
       '#default_value' => $this->options['available_breakpoints'],
       '#description' => $this->t('Select the maximum screen width (in pixels) at which the parallax effect should be disabled. Selecting "none" will keep the parallax effect active on all screen sizes.'),
+    ];
+
+    $form['max_width'] = [
+      '#type' => 'number',
+      '#title' => $this->t('Max Width (px)'),
+      '#default_value' => $this->options['max_width'],
+      '#description' => $this->t('Defines the maximum width for the parallax content or insert zero allows it to stretch to 100 percent.'),
+      '#step' => 1,
+      '#min' => 0,
     ];
 
     $form['section_height'] = [

@@ -36,3 +36,7 @@
   height: 100%;
   pointer-events: none;
 }
+
+.parallax-row .parallax-content-inner {
+  margin: 0 auto;
+}

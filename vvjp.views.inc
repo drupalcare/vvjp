@@ -71,6 +71,11 @@ function vvjp_views_data_alter(array &$data): void {
           ],
         ],
       ],
+      'max_width' => [
+        'type' => 'numeric',
+        'label' => t('Max Width for Parallax content'),
+        'description' => t('The max width for the parallax content.'),
+      ],
       'available_breakpoints' => [
         'title' => t('Responsive Breakpoints'),
         'help' => t('Define breakpoints for responsive design.'),
