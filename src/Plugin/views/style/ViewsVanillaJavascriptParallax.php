@@ -3,8 +3,8 @@
 namespace Drupal\vvjp\Plugin\views\style;
 
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\views\Plugin\views\style\StylePluginBase;
 use Drupal\Core\Url;
+use Drupal\views\Plugin\views\style\StylePluginBase;
 
 /**
  * Style plugin to render items in Parallax using vanilla JavaScript.
@@ -100,18 +100,15 @@ class ViewsVanillaJavascriptParallax extends StylePluginBase {
     ];
 
     $form['section_height'] = [
-    // Or 'fieldset' if you want a titled box around it.
-      '#type' => 'container',
+      '#type' => 'fieldset',
       '#title' => $this->t('Section Height'),
       '#description' => $this->t('Define the height of the parallax section by entering a value and selecting a unit.'),
       '#attributes' => [
-    // Optional, for styling or JS targeting.
         'class' => ['section-height-wrapper'],
       ],
     ];
 
-    $section_height = $this->options['section_height'] ??
-    ['value' => 75, 'unit' => 'vh'];
+    $section_height = $this->options['section_height'] ?? ['value' => 75, 'unit' => 'vh'];
 
     $form['section_height']['value'] = [
       '#type' => 'number',
@@ -119,26 +116,35 @@ class ViewsVanillaJavascriptParallax extends StylePluginBase {
       '#default_value' => $section_height['value'] ?? 75,
       '#description' => $this->t('Enter the numeric value for the height.'),
       '#attributes' => [
-    // Optional, for inline display.
         'style' => 'width: 150px; display: inline-block;',
       ],
     ];
 
     $form['section_height']['unit'] = [
       '#type' => 'select',
-      '#title' => $this->t('Height Unit'),
+      '#title' => $this->t('Height Unit (vw, vh, px, %, em, rem)'),
       '#default_value' => $section_height['unit'] ?? 'vh',
       '#options' => [
+        'vw' => $this->t('Viewport Width (vw)'),
         'vh' => $this->t('Viewport Height (vh)'),
         'px' => $this->t('Pixels (px)'),
         '%' => $this->t('Percentage (%)'),
         'em' => $this->t('Ems (em)'),
+        'rem' => $this->t('Root Ems (rem)'),
       ],
       '#attributes' => [
-      // Optional, for inline display.
         'style' => 'width: 150px; display: inline-block;',
       ],
-      '#description' => $this->t('Select the unit for the height.'),
+      '#description' => $this->t('Choose from the following units:
+        <ul>
+          <li><strong>Viewport Width (vw):</strong> 1vw is equal to 1 percent of the viewport’s width. For example, if the viewport is 1000px wide, 10vw will equal 100px.</li>
+          <li><strong>Viewport Height (vh):</strong> 1vh is equal to 1 percent of the viewport’s height. For example, if the viewport is 1000px high, 10vh will equal 100px.</li>
+          <li><strong>Pixels (px):</strong> Specifies an exact number of pixels for the height, regardless of the viewport size.</li>
+          <li><strong>Percentage (%):</strong> Specifies a percentage of the parent container’s height.</li>
+          <li><strong>Ems (em):</strong> Relative to the font size of the element. For example, if the font size is 16px, 1em equals 16px.</li>
+          <li><strong>Root Ems (rem):</strong> Relative to the font size of the root element (typically <code>&lt;html&gt;</code>). For example, if the root font size is 16px, 1rem equals 16px.</li>
+        </ul>'
+      ),
     ];
 
     // Parallax speed configuration.

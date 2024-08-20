@@ -12,8 +12,8 @@
  * Developer:    Alaa Haddad https://www.alaahaddad.com.
  */
 
-use Drupal\Core\Template\Attribute;
 use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Template\Attribute;
 
 /**
  * Implements hook_help().
@@ -175,7 +175,6 @@ function template_preprocess_views_view_vvjp(array &$variables) {
     'scroll_effect' => $handler->options['scroll_effect'],
     'overlay_color' => $handler->options['overlay_color'],
     'overlay_opacity' => $handler->options['overlay_opacity'],
-  // Combine value and unit for section height.
     'section_height' => $section_height,
     'available_breakpoints' => $handler->options['available_breakpoints'],
     'bg_animation_easing' => $handler->options['bg_animation_easing'],
