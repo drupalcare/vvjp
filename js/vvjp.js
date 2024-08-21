@@ -13,7 +13,7 @@
 
   Drupal.behaviors.VVJParallax = {
     attach: function(context, settings) {
-      const parallaxElements = once('vvj-parallax', '.parallax-row', context);
+      const parallaxElements = once('vvjParallax', '.parallax-row', context);
 
       // Function to update parallax elements based on scroll position
       const updateParallax = () => {
