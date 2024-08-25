@@ -8,7 +8,7 @@
  */
 
 @media (min-width:36rem) {
-  .vvjp .parallax-background {
+  .vvjp.br-576 .parallax-background {
     position: absolute;
     top: 0;
     left: 0;
@@ -17,18 +17,18 @@
     will-change: transform;
   }
 
-  .vvjp .parallax-content {
+  .vvjp.br-576 .parallax-content {
     position: relative;
     z-index: 1;
     padding: 16px;
   }
 
-  .vvjp .none-effect .parallax-content {
+  .vvjp.br-576 .none-effect .parallax-content {
     opacity: 1;
     transform: none;
   }
 
-  .vvjp .parallax-background.image-url-empty {
+  .vvjp.br-576 .parallax-background.image-url-empty {
     opacity: 1;
     background-color: #f8d7da;
     color: #721c24;
@@ -42,126 +42,126 @@
     height: 100vh;
   }
 
-  .vvjp .parallax-background.image-url-empty .inline-link {
+  .vvjp.br-576 .parallax-background.image-url-empty .inline-link {
     display: inline;
   }
 
   /* Effect-specific styles */
-  .vvjp .fade-effect .parallax-content {
+  .vvjp.br-576 .fade-effect .parallax-content {
     opacity: 0;
     transform: translateY(50px);
     filter: blur(5px);
     transition: opacity 0.7s cubic-bezier(0.25, 0.8, 0.5, 1), transform 0.7s cubic-bezier(0.25, 0.8, 0.5, 1), filter 0.7s cubic-bezier(0.25, 0.8, 0.5, 1);
   }
 
-  .vvjp .fade-effect .parallax-content.visible {
+  .vvjp.br-576 .fade-effect .parallax-content.visible {
     opacity: 1;
     transform: translateY(0);
     filter: blur(0);
   }
 
-  .vvjp .scale-effect .parallax-content {
+  .vvjp.br-576 .scale-effect .parallax-content {
     transform: scale(0.8);
     transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
   }
 
-  .vvjp .scale-effect .parallax-content.visible {
+  .vvjp.br-576 .scale-effect .parallax-content.visible {
     transform: scale(1);
   }
 
-  .vvjp .rotate-effect .parallax-content {
+  .vvjp.br-576 .rotate-effect .parallax-content {
     transform: rotate(10deg) scale(0.9);
     transition: transform 0.7s ease-out;
   }
 
-  .vvjp .rotate-effect .parallax-content.visible {
+  .vvjp.br-576 .rotate-effect .parallax-content.visible {
     transform: rotate(0) scale(1);
   }
 
-  .vvjp .fade-scale-effect .parallax-content {
+  .vvjp.br-576 .fade-scale-effect .parallax-content {
     opacity: 0;
     transform: scale(0.8) translateY(50px) rotate(-10deg);
     transition: opacity 0.7s ease-in-out, transform 0.7s ease-in-out;
   }
 
-  .vvjp .fade-scale-effect .parallax-content.visible {
+  .vvjp.br-576 .fade-scale-effect .parallax-content.visible {
     opacity: 1;
     transform: scale(1) translateY(0) rotate(0);
   }
 
   /* More complex */
-  .vvjp .three-d-effect .parallax-content {
+  .vvjp.br-576 .three-d-effect .parallax-content {
     opacity: 0;
     transform: perspective(600px) rotateX(15deg) translateY(50px);
     transition: opacity 0.5s ease, transform 0.5s ease;
   }
 
-  .three-d-effect .parallax-content.visible {
+  .vvjp.br-576 .three-d-effect .parallax-content.visible {
     opacity: 1;
     transform: perspective(600px) rotateX(0deg) translateY(0);
   }
 
-  .vvjp .shadow-effect .parallax-content {
+  .vvjp.br-576 .shadow-effect .parallax-content {
     opacity: 0;
     transform: translateY(50px);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
     transition: opacity 0.5s ease, transform 0.5s ease, box-shadow 0.5s ease;
   }
 
-  .vvjp .shadow-effect .parallax-content.visible {
+  .vvjp.br-576 .shadow-effect .parallax-content.visible {
     opacity: 1;
     transform: translateY(0);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   }
 
-  .vvjp .glow-effect .parallax-content {
+  .vvjp.br-576 .glow-effect .parallax-content {
     opacity: 0;
     transform: translateY(50px);
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
     transition: opacity 0.5s ease, transform 0.5s ease, box-shadow 0.5s ease;
   }
 
-  .vvjp .glow-effect .parallax-content.visible {
+  .vvjp.br-576 .glow-effect .parallax-content.visible {
     opacity: 1;
     transform: translateY(0);
     box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
   }
 
-  .vvjp .smooth-effect .parallax-content {
+  .vvjp.br-576 .smooth-effect .parallax-content {
     opacity: 0;
     transform: translateY(50px);
     transition: opacity 0.7s cubic-bezier(0.25, 0.8, 0.5, 1), transform 0.7s cubic-bezier(0.25, 0.8, 0.5, 1);
   }
 
-  .vvjp .smooth-effect .parallax-content.visible {
+  .vvjp.br-576 .smooth-effect .parallax-content.visible {
     opacity: 1;
     transform: translateY(0);
   }
 
-  .vvjp .hover-effect .parallax-content {
+  .vvjp.br-576 .hover-effect .parallax-content {
     opacity: 0;
     transform: translateY(50px);
     transition: opacity 0.5s ease, transform 0.5s ease;
   }
 
-  .vvjp .hover-effect .parallax-content.visible {
+  .vvjp.br-576 .hover-effect .parallax-content.visible {
     opacity: 1;
     transform: translateY(0);
   }
 
-  .vvjp .hover-effect .parallax-content:hover {
+  .vvjp.br-576 .hover-effect .parallax-content:hover {
     transform: translateY(-10px) scale(1.05);
     transition: transform 0.3s ease;
   }
 
-  .vvjp .combined-effect .parallax-content {
+  .vvjp.br-576 .combined-effect .parallax-content {
     opacity: 0;
     transform: translateY(50px) rotate(-10deg);
     transition: opacity 0.5s ease, transform 0.5s ease, box-shadow 0.5s ease;
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
   }
 
-  .vvjp .combined-effect .parallax-content.visible {
+  .vvjp.br-576 .combined-effect .parallax-content.visible {
     opacity: 1;
     transform: translateY(0) rotate(0deg);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -170,29 +170,29 @@
 }
 
 @media (max-width:36rem) {
-  .vvjp .flipbox-item-inner > *:last-child {
+  .vvjp.br-576 .flipbox-item-inner > *:last-child {
     align-self: stretch;
   }
 
-  .vvjp .vvjp-inner {
+  .vvjp.br-576 .vvjp-inner {
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: auto 1fr;
     height: 100%;
   }
 
-  .vvjp .vvjp-inner .parallax-row {
+  .vvjp.br-576 .vvjp-inner .parallax-row {
     position: relative;
     height: auto !important;
   }
 
-  .vvjp .parallax-background {
+  .vvjp.br-576 .parallax-background {
     height: 0;
     width: 0;
     display: none;
   }
 
-  .vvjp .parallax-content {
+  .vvjp.br-576 .parallax-content {
     padding: 1rem;
   }
 
