@@ -6,7 +6,7 @@
  * Website:      https://www.flashwebcenter.com
  * Developer:    Alaa Haddad https://www.alaahaddad.com.
  */
-.visually-hidden {
+.vvj-parallax .visually-hidden {
   position: absolute;
   width: 1px;
   height: 1px;
@@ -21,6 +21,13 @@
 .vvj-parallax,
 .vvj-parallax * {
   box-sizing: border-box;
+}
+
+.vvj-parallax,
+.vvj-parallax .view-content {
+  width: 100%;
+  min-width: 100%;
+  display: block!important;
 }
 
 .parallax-row {
