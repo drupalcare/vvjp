@@ -7,13 +7,16 @@
  * Developer:    Alaa Haddad https://www.alaahaddad.com.
  */
 
-
 ((Drupal, drupalSettings, once) => {
   'use strict';
 
   Drupal.behaviors.VVJParallax = {
-    attach: function(context, settings) {
+    attach: function (context, settings) {
       const parallaxElements = once('vvjParallax', '.parallax-row', context);
+
+      if (!parallaxElements.length) {
+        return; // Exit if no elements are found in the context
+      }
 
       // Function to update parallax elements based on scroll position
       const updateParallax = () => {
@@ -137,5 +140,3 @@
     }
   };
 })(Drupal, drupalSettings, once);
-
-
