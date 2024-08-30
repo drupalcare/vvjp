@@ -21,6 +21,9 @@
 {% set parallax_inner_id = 'vvjp-inner-' ~ unique_id %}
 {% set breakpoints = options.available_breakpoints %}
 {% set max_width = options.max_width %}
+{% set animation_speed =  options.bg_animation_speed ~ 's' %}
+{% set animation_easing =  options.bg_animation_easing %}
+{% set background_position =  options.background_position %}
 {# Initialize base classes array #}
 {% set classes = [
   'vvjp',
@@ -44,17 +47,17 @@
       {% set effect_class = options.scroll_effect ~ '-effect' %}
 
       {# Render each parallax row with background and content #}
-      <div id="{{ vvjp_id ~ '-' ~ key }}" class="parallax-row {{ effect_class }}" data-breakpoint="{{ breakpoints }}" data-parallax-speed="{{ options.parallax_speed }}" data-parallax-effect="{{ options.scroll_effect }}" style="height: {{ section_height }};">
+      <div id="{{ vvjp_id ~ '-' ~ key }}" class="parallax-row {{ effect_class }}" data-breakpoint="{{ breakpoints }}" data-parallax-speed="{{ options.parallax_speed }}" data-parallax-effect="{{ options.scroll_effect }}" style="--section-height: {{ section_height }};">
 
-        <div class="parallax-background" style="background-image: url('{{ image_field }}'); background-position: {{ options.background_position }}; background-size: cover; transition: transform {{ options.bg_animation_speed }}s {{ options.bg_animation_easing }};">
+        <div class="parallax-background" style="background-image: url('{{ image_field }}'); --background-position: {{ background_position }}; --animation-speed: {{ animation_speed }}; --animation-easing: {{ animation_easing }};">
         </div>
 
         {% if background_rgb and not options.disable_overlay and not options.over_content_only %}
-        <div class="parallax-overlay" style="background-color: {{ background_rgb }}"></div>
+        <div class="parallax-overlay" style="--bg-parallax-overlay: {{ background_rgb }}"></div>
         {% endif %}
 
-        <div class="parallax-content"{% if background_rgb and not options.disable_overlay and options.over_content_only %} style="background-color: {{ background_rgb }};"{% endif %}>
-          <div class="parallax-content-inner"{% if max_width %} style="max-width: {{ max_width }}px;"{% endif %}>
+        <div class="parallax-content"{% if background_rgb and not options.disable_overlay and options.over_content_only %} style="--bg-parallax-content: {{ background_rgb }};"{% endif %}>
+          <div class="parallax-content-inner"{% if max_width %} style="--max-width: {{ max_width }};"{% endif %}>
             {{ foreground_field|safe_html }}
           </div>
         </div>
