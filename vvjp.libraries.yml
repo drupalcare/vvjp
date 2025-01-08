@@ -1,5 +1,4 @@
 vvjp:
-  version: VERSION
   css:
     theme:
       css/vvjp.css: { }
@@ -12,43 +11,36 @@ vvjp:
     - core/once
 
 vvjp__all:
-  version: VERSION
   css:
     theme:
       css/vvjp-all.css: { }
 
 vvjp-style:
-  version: VERSION
   css:
     theme:
       css/vvjp-style.css: { }
 
 vvjp__576:
-  version: VERSION
   css:
     theme:
       css/vvjp-576.css: { weight: 202 }
 
 vvjp__768:
-  version: VERSION
   css:
     theme:
       css/vvjp-768.css: { weight: 202 }
 
 vvjp__992:
-  version: VERSION
   css:
     theme:
       css/vvjp-992.css: { weight: 202 }
 
 vvjp__1200:
-  version: VERSION
   css:
     theme:
       css/vvjp-1200.css: { weight: 202 }
 
 vvjp__1400:
-  version: VERSION
   css:
     theme:
       css/vvjp-1400.css: { weight: 202 }
