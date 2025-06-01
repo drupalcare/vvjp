@@ -7,7 +7,7 @@ use Twig\Markup;
 use Twig\TwigFilter;
 
 /**
- * Class VVJTTwigExtension.
+ * Class VVJPTwigExtension.
  *
  * Provides a custom Twig extension for marking HTML content as safe.
  *
