@@ -1,0 +1,56 @@
+views.style.views_vvjp:
+  type: views_style
+  label: 'Views Vanilla JavaScript Parallax'
+  mapping:
+    unique_id:
+      type: integer
+      label: 'Unique ID'
+    parallax_speed:
+      type: float
+      label: 'Parallax speed'
+    background_position:
+      type: string
+      label: 'Background position'
+    overlay_color:
+      type: string
+      label: 'Overlay color'
+    overlay_opacity:
+      type: float
+      label: 'Overlay opacity'
+    section_height:
+      type: mapping
+      label: 'Section height'
+      mapping:
+        value:
+          type: integer
+          label: 'Height value'
+        unit:
+          type: string
+          label: 'Height unit'
+    available_breakpoints:
+      type: sequence
+      label: 'Available breakpoints'
+      sequence:
+        type: string
+        label: 'Breakpoint'
+    bg_animation_easing:
+      type: string
+      label: 'Background animation easing'
+    bg_animation_speed:
+      type: float
+      label: 'Background animation speed'
+    max_width:
+      type: integer
+      label: 'Maximum width'
+    enable_css:
+      type: boolean
+      label: 'Enable CSS library'
+    scroll_effect:
+      type: string
+      label: 'Scroll effect'
+    disable_overlay:
+      type: boolean
+      label: 'Disable overlay'
+    over_content_only:
+      type: boolean
+      label: 'Apply overlay over content only'

@@ -1,4 +1,4 @@
-name: 'Views Vanilla Javascript Parallax'
+name: 'Views Vanilla Javascript Parallax - VVJP'
 type: module
 description: 'Provides a Vanilla Javascript Parallax format for Views.'
 core_version_requirement: ^10 || ^11
