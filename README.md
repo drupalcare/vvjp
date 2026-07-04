@@ -31,6 +31,20 @@ Behavior runs in a `<vvjp-parallax>` custom element extending `VvjElementBase`.
   with *Use replacement tokens from the first row*
 - **Drupal admin help** — `/admin/help/vvjp`
 
+## Token Support in Views Text Areas
+
+In Views headers, footers, or empty text with *Use replacement tokens from the
+first row*, default Twig tokens (`{{ title }}`) do not work. Use VVJP tokens
+instead:
+
+- `{{ title }}` → `[vvjp:title]`
+- `{{ field_image }}` → `[vvjp:field_image]`
+- Append `:plain` for plain text: `[vvjp:title:plain]`
+
+v2 resolves tokens through the shared `vvj_core.token_resolver` service; syntax
+is unchanged from v1. Tokens read from the **first row** of rendered View
+fields. Complex field rewrites are not supported.
+
 ## Installation
 
 ```bash
