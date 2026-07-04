@@ -1,108 +1,77 @@
-# Views Vanilla JavaScript Parallax
+# Views Vanilla JavaScript Parallax (VVJP)
 
-## Overview
-The **Views Vanilla JavaScript Parallax** module (machine name: `vvjp`) is a 
-powerful and flexible Views style plugin designed to create dynamic and 
-responsive parallax effects for displaying content items. This module enhances 
-the visual appeal of your Drupal site by leveraging pure vanilla JavaScript for 
-seamless parallax scrolling experiences.
+A vanilla-JavaScript parallax-section **Views format** for Drupal 11.3+ / 12.
+Renders Views rows as scroll-driven parallax sections — image background with a
+configurable transform-on-scroll effect (translate / blur / opacity / scale /
+rotate), color overlay, and configurable scroll effects on the foreground
+content. Includes a mobile bypass that swaps in a regular `<img>` below a
+configurable breakpoint.
+
+v2.0 builds on the **`drupal/vvj_core` foundation** (composer auto-installs it).
+Behavior runs in a `<vvjp-parallax>` custom element extending `VvjElementBase`.
 
 ## Features
-- **Parallax Effects**: Renders content items with smooth parallax effects for 
-  engaging visual displays.
-- **Customizable Options**: Offers adjustable settings for speed, background 
-  position, overlay color and opacity, animation speed, easing, and more.
-- **Responsive Design**: Includes breakpoints to ensure the parallax adapts 
-  seamlessly to different screen sizes.
-- **Scroll Effects**: Choose from various effects like fade, scale, rotate, 3D 
-  transformations, shadow, glow, smooth transitions, hover interactions, and 
-  combined effects.
-- **Unique ID Generation**: Automatically generates a unique numeric ID for each 
-  view display to ensure consistency and prevent conflicts.
 
-## Configuration
-After installing and enabling the module, you can configure it through the Views 
-UI:
-
-1. **Parallax Speed**: Set the speed of the parallax effect (e.g., 0.1 for slow, 
-   2 for fast).
-2. **Background Position**: Choose the position of the background image (e.g., 
-   center, top, bottom, left, right).
-3. **Overlay Color**: Select a color overlay for the parallax background.
-4. **Overlay Opacity**: Define the opacity level for the overlay.
-5. **Background Animation Speed**: Set the speed of the background animation.
-6. **Background Animation Easing**: Choose the easing function for the 
-   animation (e.g., ease, ease-in, ease-out, linear).
-7. **Scroll Effect**: Select from various effects like fade, scale, rotate, 3D 
-   transformations, shadow, glow, smooth transitions, hover interactions, or 
-   combined effects.
-8. **Section Height**: Define the height of the parallax section in viewport 
-   height units.
-9. **Available Breakpoints**: Select the maximum screen width (in pixels) at 
-   which the parallax effect should be disabled. Selecting "none" will keep the 
-   parallax effect active on all screen sizes.
-
-## Token Support in Views Text Areas
-
-In Views headers, footers, or empty text areas—when using *Global: Text area* or
-*Global: Unfiltered text*—there is an option called **"Use replacement tokens
-from the first row."**
-
-The default Twig-style tokens (e.g., `{{ title }}` or `{{ field_image }}`)
-**will not work** with the VVJP style. Instead, use the custom tokens provided
-by VVJP:
-
-**Examples:**
-
-- `{{ title }}` → `[vvjp:title]`  
-- `{{ field_image }}` → `[vvjp:field_image]`
-
-To strip any HTML from the output, you can append `:plain` to the token:
-
-- `[vvjp:title:plain]`
-
-These tokens pull data from the **first row** of the View result and are
-designed to work seamlessly with the VVJP rendering system.
-
-## Example Usage
-1. Create a new view or edit an existing view.
-2. Under the "Format" section, select "Views Vanilla JavaScript Parallax" as the 
-   style.
-3. Configure the parallax speed, background position, overlay settings, 
-   animation type, and responsive breakpoints as needed.
-4. Save the view and see the parallax effect in action on the front end.
-
-## Additional Information
-- **Dependencies**: This module does not have any dependencies on other 
-  contributed modules.
-- **Compatibility**: Fully compatible with Drupal 10 and follows Drupal best 
-  practices.
+- Scroll-tied background transform (RAF-throttled)
+- Five effect modes: `translate` (default) / `blur` / `opacity` / `scale` /
+  `rotate`
+- Configurable parallax speed (0.1 - 2.0)
+- 11 scroll-effect options for foreground content
+- Configurable section height in `vw` / `vh` / `px` / `%` / `em` / `rem`
+- 18 background-position options
+- Configurable max content width
+- Color overlay with adjustable opacity (or scoped to content only, or disabled)
+- Mobile bypass: below the chosen breakpoint, the parallax is dropped and a
+  regular `<img>` is rendered instead
+- 6 responsive breakpoints (`all` / 576 / 768 / 992 / 1200 / 1400 px)
+- `prefers-reduced-motion` honored — parallax offset is forced to 0 for reduced-
+  motion users
+- Lazy IntersectionObserver hydration; AbortController-tracked listeners
+- **Views tokens** — `[vvjp:field]` / `[vvjp:field:plain]` in Views text areas
+  with *Use replacement tokens from the first row*
+- **Drupal admin help** — `/admin/help/vvjp`
 
 ## Installation
-1. Download and install the module from 
-   [Drupal.org](https://www.drupal.org/project/vvjp).
-2. Enable the module through the Drupal admin interface or using Drush: 
-   `drush en vvjp`
-3. Clear caches to ensure the new plugin is available: `drush cr`
 
-## Troubleshooting
-If you encounter any issues or have suggestions for improvements, please open 
-an issue in the module's issue queue on Drupal.org.
+```bash
+composer require drupal/vvjp:^2.0
+drush en vvjp
+```
 
-## Maintainers
-- [Alaa Haddad](https://www.drupal.org/u/flashwebcenter)
+## Usage
 
-## Support
-For issues, feature requests, and general support, please use the 
-[issue queue](https://www.drupal.org/project/issues/vvjp).
+1. Create or edit a View.
+2. Set **Format** to *Views Vanilla JavaScript Parallax*.
+3. Set **Show** to *Fields*.
+4. The first field MUST be an image with the **URL to image** formatter — its
+   URL becomes the parallax background.
+5. Place a `<div class="vvjp-separator"></div>` field between the URL and the
+   foreground content fields.
+6. Configure responsive / dimensions / parallax / background / scroll effects /
+   overlay in the format settings.
+7. Save.
+
+**Sample view:** Optional config `views.view.vvjp_example` (`config/optional/`)
+installs when there is no ID conflict.
+
+## Drop-in upgrade from 1.x
+
+`composer update drupal/vvjp && drush updb && drush cr` is sufficient. v2
+preserves:
+
+- Plugin ID `views_vvjp`, theme hook `views_view_vvjp`
+- Twig template names
+- All option keys (incl. `section_height: {value, unit}` array shape)
+- Library names (`vvjp`, `vvjp-style`, `vvjp__all/576/768/992/1200/1400`)
+- JS behavior key `Drupal.behaviors.VVJParallax`
+- All CSS class names (`.vvjp`, `.vvjp-inner`, `.parallax-row`, `.parallax-
+  background`, `.parallax-overlay`, `.parallax-content`, `.parallax-content-
+  inner`)
+- Separator marker `<div class="vvjp-separator"></div>`
+
+Outer rendered tag changed from `<div>` to `<vvjp-parallax>`. Theme selectors
+targeting `.vvjp` keep matching.
 
 ## License
-This project is licensed under the 
-[GNU General Public License, version 2 or later](http://www.gnu.org/licenses/gpl-2.0.html).
 
----
-
-This file follows the Drupal best practices for module documentation, ensuring 
-that users have a clear understanding of the module's purpose, features, and 
-usage. It also includes important notes on responsive design and accessibility 
-to guide users in setting up the module correctly.
+GPL-2.0-or-later.

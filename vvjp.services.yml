@@ -1,5 +1,20 @@
 services:
-  vvjp.twig_extension:
-    class: Drupal\vvjp\Twig\VVJPTwigExtension
-    tags:
-      - { name: twig.extension }
+  Drupal\vvjp\Hook\VvjpHelpHook:
+    arguments:
+      - '@extension.list.module'
+      - '@module_handler'
+      - '@plugin.manager.filter'
+      - '@config.factory'
+
+  Drupal\vvjp\Hook\VvjpThemeHook:
+    autowire: true
+
+  Drupal\vvjp\Hook\VvjpPreprocessHooks:
+    autowire: true
+
+  # `@?` makes the dependency nullable so the container compiles even
+  # when vvj_core hasn't been enabled yet (the v1 → v2 upgrade window
+  # before vvjp_update_10001 runs).
+  Drupal\vvjp\Hook\VvjpTokenHooks:
+    arguments:
+      - '@?vvj_core.token_resolver'

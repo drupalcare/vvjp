@@ -3,22 +3,27 @@ vvjp:
     theme:
       css/vvjp.css: { }
   js:
+    js/vvjp-parallax-element.js: {}
     js/vvjp.js: {}
   dependencies:
     - core/drupal
     - core/drupal.ajax
     - core/drupalSettings
     - core/once
-
-vvjp__all:
-  css:
-    theme:
-      css/vvjp-all.css: { }
+    - vvj_core/tokens
+    - vvj_core/base
+    - vvj_core/a11y
+    - vvj_core/element-base
 
 vvjp-style:
   css:
     theme:
       css/vvjp-style.css: { }
+
+vvjp__all:
+  css:
+    theme:
+      css/vvjp-all.css: { }
 
 vvjp__576:
   css:

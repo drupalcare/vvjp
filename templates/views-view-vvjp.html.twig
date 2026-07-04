@@ -21,9 +21,9 @@
 {% set parallax_inner_id = 'vvjp-inner-' ~ unique_id %}
 {% set breakpoints = options.available_breakpoints %}
 {% set max_width = options.max_width %}
-{% set animation_speed =  options.bg_animation_speed ~ 's' %}
-{% set animation_easing =  options.bg_animation_easing %}
-{% set background_position =  options.background_position %}
+{% set animation_speed = options.bg_animation_speed ~ 's' %}
+{% set animation_easing = options.bg_animation_easing %}
+{% set background_position = options.background_position %}
 {# Initialize base classes array #}
 {% set classes = [
   'vvjp',
@@ -31,7 +31,7 @@
   vvjp_id,
 ] %}
 
-<div {{ attributes.addClass(classes).setAttribute('id', vvjp_id) }}>
+<vvjp-parallax {{ attributes.addClass(classes).setAttribute('id', vvjp_id) }}>
   <div id="{{ parallax_inner_id }}" class="vvjp-inner">
 
     {# Loop through each row to render individual parallax sections #}
@@ -66,4 +66,4 @@
     {% endfor %}
 
   </div> {# End of vvjp-inner #}
-</div> {# End of main wrapper #}
+</vvjp-parallax>
