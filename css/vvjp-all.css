@@ -22,23 +22,23 @@
 }
 
 .vvjp.br-all .none-effect .parallax-content {
-  opacity: 1;
   transform: none;
+  opacity: 1;
 }
 
 .vvjp.br-all .parallax-background.image-url-empty {
-  opacity: 1;
-  background-color: #f8d7da;
-  color: #721c24;
+  z-index: 5;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.5em;
-  text-align: center;
-  padding: 20px;
-  z-index: 5;
   height: 100vh;
   height: 100dvh;
+  padding: 20px;
+  text-align: center;
+  opacity: 1;
+  color: #721c24;
+  background-color: #f8d7da;
+  font-size: 1.5em;
 }
 
 .vvjp.br-all .parallax-background.image-url-empty .inline-link {
@@ -47,21 +47,24 @@
 
 /* Effect-specific styles */
 .vvjp.br-all .fade-effect .parallax-content {
-  opacity: 0;
+  transition:
+    opacity 0.7s cubic-bezier(0.25, 0.8, 0.5, 1),
+    transform 0.7s cubic-bezier(0.25, 0.8, 0.5, 1),
+    filter 0.7s cubic-bezier(0.25, 0.8, 0.5, 1);
   transform: translateY(50px);
+  opacity: 0;
   filter: blur(5px);
-  transition: opacity 0.7s cubic-bezier(0.25, 0.8, 0.5, 1), transform 0.7s cubic-bezier(0.25, 0.8, 0.5, 1), filter 0.7s cubic-bezier(0.25, 0.8, 0.5, 1);
 }
 
 .vvjp.br-all .fade-effect .parallax-content.visible {
-  opacity: 1;
   transform: translateY(0);
+  opacity: 1;
   filter: blur(0);
 }
 
 .vvjp.br-all .scale-effect .parallax-content {
-  transform: scale(0.8);
   transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  transform: scale(0.8);
 }
 
 .vvjp.br-all .scale-effect .parallax-content.visible {
@@ -69,8 +72,8 @@
 }
 
 .vvjp.br-all .rotate-effect .parallax-content {
-  transform: rotate(10deg) scale(0.9);
   transition: transform 0.7s ease-out;
+  transform: rotate(10deg) scale(0.9);
 }
 
 .vvjp.br-all .rotate-effect .parallax-content.visible {
@@ -78,90 +81,107 @@
 }
 
 .vvjp.br-all .fade-scale-effect .parallax-content {
-  opacity: 0;
+  transition:
+    opacity 0.7s ease-in-out,
+    transform 0.7s ease-in-out;
   transform: scale(0.8) translateY(50px) rotate(-10deg);
-  transition: opacity 0.7s ease-in-out, transform 0.7s ease-in-out;
+  opacity: 0;
 }
 
 .vvjp.br-all .fade-scale-effect .parallax-content.visible {
-  opacity: 1;
   transform: scale(1) translateY(0) rotate(0);
+  opacity: 1;
 }
 
 /* More complex */
 .vvjp.br-all .three-d-effect .parallax-content {
-  opacity: 0;
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
   transform: perspective(600px) rotateX(15deg) translateY(50px);
-  transition: opacity 0.5s ease, transform 0.5s ease;
+  opacity: 0;
 }
 
 .vvjp.br-all .three-d-effect .parallax-content.visible {
-  opacity: 1;
   transform: perspective(600px) rotateX(0deg) translateY(0);
+  opacity: 1;
 }
 
 .vvjp.br-all .shadow-effect .parallax-content {
-  opacity: 0;
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease,
+    box-shadow 0.5s ease;
   transform: translateY(50px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
-  transition: opacity 0.5s ease, transform 0.5s ease, box-shadow 0.5s ease;
+  opacity: 0;
+  box-shadow: 0 10px 20px rgb(0, 0, 0, 0.3);
 }
 
 .vvjp.br-all .shadow-effect .parallax-content.visible {
-  opacity: 1;
   transform: translateY(0);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  opacity: 1;
+  box-shadow: 0 4px 10px rgb(0, 0, 0, 0.1);
 }
 
 .vvjp.br-all .glow-effect .parallax-content {
-  opacity: 0;
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease,
+    box-shadow 0.5s ease;
   transform: translateY(50px);
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-  transition: opacity 0.5s ease, transform 0.5s ease, box-shadow 0.5s ease;
+  opacity: 0;
+  box-shadow: 0 0 10px rgb(255, 255, 255, 0.5);
 }
 
 .vvjp.br-all .glow-effect .parallax-content.visible {
-  opacity: 1;
   transform: translateY(0);
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+  opacity: 1;
+  box-shadow: 0 0 20px rgb(255, 255, 255, 0.8);
 }
 
 .vvjp.br-all .smooth-effect .parallax-content {
-  opacity: 0;
+  transition:
+    opacity 0.7s cubic-bezier(0.25, 0.8, 0.5, 1),
+    transform 0.7s cubic-bezier(0.25, 0.8, 0.5, 1);
   transform: translateY(50px);
-  transition: opacity 0.7s cubic-bezier(0.25, 0.8, 0.5, 1), transform 0.7s cubic-bezier(0.25, 0.8, 0.5, 1);
+  opacity: 0;
 }
 
 .vvjp.br-all .smooth-effect .parallax-content.visible {
-  opacity: 1;
   transform: translateY(0);
+  opacity: 1;
 }
 
 .vvjp.br-all .hover-effect .parallax-content {
-  opacity: 0;
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
   transform: translateY(50px);
-  transition: opacity 0.5s ease, transform 0.5s ease;
+  opacity: 0;
 }
 
 .vvjp.br-all .hover-effect .parallax-content.visible {
-  opacity: 1;
   transform: translateY(0);
+  opacity: 1;
 }
 
 .vvjp.br-all .hover-effect .parallax-content:hover {
-  transform: translateY(-10px) scale(1.05);
   transition: transform 0.3s ease;
+  transform: translateY(-10px) scale(1.05);
 }
 
 .vvjp.br-all .combined-effect .parallax-content {
-  opacity: 0;
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease,
+    box-shadow 0.5s ease;
   transform: translateY(50px) rotate(-10deg);
-  transition: opacity 0.5s ease, transform 0.5s ease, box-shadow 0.5s ease;
-  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  box-shadow: 0 8px 15px rgb(0, 0, 0, 0.2);
 }
 
 .vvjp.br-all .combined-effect .parallax-content.visible {
-  opacity: 1;
   transform: translateY(0) rotate(0deg);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  opacity: 1;
+  box-shadow: 0 4px 10px rgb(0, 0, 0, 0.1);
 }

@@ -10,8 +10,6 @@
 // phpcs:disable Squiz.WhiteSpace.OperatorSpacing
 
 ((Drupal, once) => {
-  'use strict';
-
   Drupal.behaviors.VVJParallax = {
     attach(context) {
       once('vvjp-parallax-marker', 'vvjp-parallax', context);

@@ -8,14 +8,14 @@
  */
 .vvj-parallax .visually-hidden {
   position: absolute;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
   width: 1px;
   height: 1px;
   margin: -1px;
   padding: 0;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  border: 0;
   white-space: nowrap;
+  border: 0;
 }
 
 .vvj-parallax,
@@ -25,9 +25,9 @@
 
 .vvj-parallax,
 .vvj-parallax .view-content {
+  display: block !important;
   width: 100%;
   min-width: 100%;
-  display: block !important;
 }
 
 .parallax-row {
@@ -56,8 +56,8 @@
 }
 
 .parallax-background {
+  transition: var(--animation-speed) var(--animation-easing);
   background-image: var(--background-image-url);
   background-position: var(--background-position);
   background-size: cover;
-  transition: var(--animation-speed) var(--animation-easing);
 }
