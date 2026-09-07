@@ -20,6 +20,7 @@
 declare(strict_types=1);
 
 use Drupal\Core\Utility\UpdateException;
+use Drupal\vvjp\VvjpConstants;
 
 /**
  * Auto-enable vvj_core (new dependency for vvjp v2).
@@ -51,4 +52,99 @@ function vvjp_update_10001(): string {
     );
   }
   return 'Enabled vvj_core (new foundation dependency for vvjp v2).';
+}
+
+/**
+ * Normalise `available_breakpoints` from a one-item list to a string.
+ *
+ * WHAT WAS WRONG. `available_breakpoints` is a single `#type => select`, so
+ * the form has always produced a STRING. The schema shipped in 2.0.0 declared
+ * it `type: sequence`, and the example view shipped a one-item list to match
+ * the schema rather than the widget. The template then renders it directly —
+ * `{{ breakpoints }}` and `'br-' ~ breakpoints` — and an array reaching Twig's
+ * auto-escape is handed to the renderer, which rejects it:
+ *
+ *   "0" is an invalid render array key. Value should be an array but got a
+ *   string.
+ *
+ * The result is HTTP 500 on every page showing the view. Measured 2026-09-07
+ * on Drupal 12 with a kernel render test; core's Element::children() throws
+ * identically on Drupal 11, so this was never version specific — it is a
+ * defect released in 2.0.0 that no test had exercised until now.
+ *
+ * WHY AN UPDATE HOOK. Fixing the schema and the shipped example view repairs
+ * new installs only. A site that installed the 2.0.0 example view has the list
+ * stored in ITS view, and would keep serving a 500 with no way to know why —
+ * the settings form cannot even display an array in a single select. Rewriting
+ * it is safe: a one-item list and the string it contains mean the same thing,
+ * and the string is what every other VVJ pattern module stores.
+ *
+ * @return string
+ *   Status message reported by drush updb.
+ */
+function vvjp_update_10002(): string {
+  $config_factory = \Drupal::configFactory();
+  $fixed = [];
+
+  foreach ($config_factory->listAll('views.view.') as $name) {
+    if (!is_string($name)) {
+      continue;
+    }
+    $view = $config_factory->getEditable($name);
+    $displays = $view->get('display');
+    if (!is_array($displays)) {
+      continue;
+    }
+
+    $changed = FALSE;
+    foreach ($displays as $display_id => $display) {
+      if (!is_array($display)) {
+        continue;
+      }
+      $display_options = $display['display_options'] ?? NULL;
+      if (!is_array($display_options)) {
+        continue;
+      }
+      $style = $display_options['style'] ?? NULL;
+      if (!is_array($style) || ($style['type'] ?? NULL) !== 'views_vvjp') {
+        continue;
+      }
+      $options = $style['options'] ?? NULL;
+      if (!is_array($options)) {
+        continue;
+      }
+      $value = $options['available_breakpoints'] ?? NULL;
+      if (!is_array($value)) {
+        continue;
+      }
+
+      // A one-item list carries the selected breakpoint; an empty list carries
+      // nothing, and the documented default is "active on all screens".
+      $first = reset($value);
+      $options['available_breakpoints'] = is_scalar($first)
+        ? (string) $first
+        : VvjpConstants::BREAKPOINT_ALL;
+
+      $style['options'] = $options;
+      $display_options['style'] = $style;
+      $display['display_options'] = $display_options;
+      $displays[$display_id] = $display;
+      $changed = TRUE;
+    }
+
+    if ($changed) {
+      $view->set('display', $displays)->save();
+      $fixed[] = $name;
+    }
+  }
+
+  if ($fixed === []) {
+    return 'No view stored available_breakpoints as a list — no action needed.';
+  }
+
+  return sprintf(
+    'Normalised available_breakpoints to a string in %d view(s): %s.',
+    count($fixed),
+    implode(', ', $fixed),
+  );
 }

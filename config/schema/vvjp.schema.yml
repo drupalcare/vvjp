@@ -28,11 +28,8 @@ views.style.views_vvjp:
           type: string
           label: 'Height unit'
     available_breakpoints:
-      type: sequence
+      type: string
       label: 'Available breakpoints'
-      sequence:
-        type: string
-        label: 'Breakpoint'
     bg_animation_easing:
       type: string
       label: 'Background animation easing'

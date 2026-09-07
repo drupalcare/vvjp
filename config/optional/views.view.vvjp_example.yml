@@ -297,8 +297,7 @@ display:
         type: views_vvjp
         options:
           grouping: {  }
-          available_breakpoints:
-            - '576'
+          available_breakpoints: '576'
           section_height:
             value: 80
             unit: vh
