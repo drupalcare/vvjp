@@ -10,6 +10,7 @@ behavior key, and the mobile-bypass fallback from 1.x.
 
 ### Fixed
 
+- Update 10003 converts v1 views to the v2 option shape (value types).
 - Restored v1's image-specific setup warning in the Views options form (shown
   only when the first field is not a "URL to image" formatter) — the shared base
   showed a generic "requires Fields as row style" note instead. Deep-link toggle
