@@ -1,7 +1,7 @@
 # Views Vanilla JavaScript Parallax (VVJP)
 
 A vanilla-JavaScript parallax-section **Views format** for Drupal 11.3+ / 12.
-Renders Views rows as scroll-driven parallax sections — image background with a
+Renders Views rows as scroll-driven parallax sections: image background with a
 configurable transform-on-scroll effect (translate / blur / opacity / scale /
 rotate), color overlay, and configurable scroll effects on the foreground
 content. Includes a mobile bypass that swaps in a regular `<img>` below a
@@ -24,12 +24,12 @@ Behavior runs in a `<vvjp-parallax>` custom element extending `VvjElementBase`.
 - Mobile bypass: below the chosen breakpoint, the parallax is dropped and a
   regular `<img>` is rendered instead
 - 6 responsive breakpoints (`all` / 576 / 768 / 992 / 1200 / 1400 px)
-- `prefers-reduced-motion` honored — parallax offset is forced to 0 for reduced-
+- `prefers-reduced-motion` honored: parallax offset is forced to 0 for reduced-
   motion users
 - Lazy IntersectionObserver hydration; AbortController-tracked listeners
-- **Views tokens** — `[vvjp:field]` / `[vvjp:field:plain]` in Views text areas
+- **Views tokens**: `[vvjp:field]` / `[vvjp:field:plain]` in Views text areas
   with *Use replacement tokens from the first row*
-- **Drupal admin help** — `/admin/help/vvjp`
+- **Drupal admin help**: `/admin/help/vvjp`
 
 ## Token Support in Views Text Areas
 
@@ -57,7 +57,7 @@ drush en vvjp
 1. Create or edit a View.
 2. Set **Format** to *Views Vanilla JavaScript Parallax*.
 3. Set **Show** to *Fields*.
-4. The first field MUST be an image with the **URL to image** formatter — its
+4. The first field MUST be an image with the **URL to image** formatter. Its
    URL becomes the parallax background.
 5. Place a `<div class="vvjp-separator"></div>` field between the URL and the
    foreground content fields.
@@ -103,10 +103,10 @@ export SIMPLETEST_DB="mysql://user:pass@localhost/dbname"
 ../vendor/bin/phpunit -c core modules/contrib/vvjp/tests/src/Kernel
 ```
 
-The **Functional** and **FunctionalJavascript** suites additionally need
+The **Functional** and **FunctionalJavascript** suites also need
 `SIMPLETEST_BASE_URL` pointing at a running web server, and the JavaScript ones
 need chromedriver. Without those they error rather than fail, and the errors
-name missing infrastructure rather than anything about this module — so don't
+name missing infrastructure rather than anything about this module, so don't
 read them as test failures. The drupal.org pipeline provides both.
 
 ## License
