@@ -1,0 +1,117 @@
+/**
+ * @file
+ * Shared by every vvjp Pattern: resets, titles, the link arrow, below state.
+ *
+ * Colours come only from the --vvj-* tokens (vvj_patterns/base) and greys;
+ * every selector starts at the view's own element. Defensive: every element
+ * a Pattern styles is reset here with full shorthands, so a theme rule on
+ * buttons, links, lists, headings or images cannot reach into a Pattern.
+ * `--vvjp-enter` and `--vvjp-progress` (0 to 1) are written on each row by
+ * vvjp-parallax-element.js in Pattern views; `.vvjp-below` is set on the
+ * element below the configured breakpoint.
+ */
+
+.vvj-pattern.vvjp {
+  --vvjp-ease-out: var(--vvj-ease-out, cubic-bezier(0.16, 1, 0.3, 1));
+  --vvjp-ease-io: var(--vvj-ease-io, cubic-bezier(0.76, 0, 0.24, 1));
+  --vvjp-font-display: var(--vvj-font-display, Georgia, "Times New Roman", serif);
+  --vvjp-font-ui: var(--vvj-font-ui, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif);
+  --vvjp-focus: var(--vvj-focus, #ffffff);
+  display: block;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  font-family: var(--vvjp-font-ui);
+}
+.vvj-pattern.vvjp,
+.vvj-pattern.vvjp *,
+.vvj-pattern.vvjp *::before,
+.vvj-pattern.vvjp *::after { box-sizing: border-box; }
+
+/* Theme resets: headings, paragraphs, lists, images. */
+.vvj-pattern.vvjp :is(h1, h2, h3, h4, h5, h6, p) {
+  margin: 0;
+  padding: 0;
+  font-size: inherit;
+  line-height: inherit;
+  color: inherit;
+  hyphens: manual;
+  overflow-wrap: normal;
+  word-break: normal;
+}
+.vvj-pattern.vvjp :is(ul, ol, li) { list-style: none; margin: 0; padding: 0; }
+.vvj-pattern.vvjp :is(img, svg) { display: block; max-width: 100%; height: auto; }
+
+/* Titles beat the theme's h1-h6 colour and never hyphenate. */
+.vvj-pattern.vvjp .vvj-title {
+  color: inherit;
+  font-weight: 600;
+  letter-spacing: normal;
+  text-transform: none;
+  hyphens: manual;
+  overflow-wrap: normal;
+  word-break: normal;
+  text-wrap: balance;
+}
+
+/* The row and its parts, cleared of vvjp.css defaults each Pattern restyles. */
+.vvj-pattern.vvjp .parallax-row { margin: 0; }
+.vvj-pattern.vvjp .parallax-content { margin: 0; padding: 16px; border: 0; border-radius: 0; box-shadow: none; }
+.vvj-pattern.vvjp .parallax-content-inner { margin: 0; }
+.vvj-pattern.vvjp .parallax-background { background-size: cover; }
+
+/* Link control: full reset, then the shared shape. */
+.vvj-pattern.vvjp .vvj-link { margin: 0; padding: 0; }
+.vvj-pattern.vvjp .vvj-link a {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  color: inherit;
+  font: inherit;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: normal;
+  text-transform: none;
+  text-decoration: none;
+  text-align: start;
+  width: auto;
+  height: auto;
+  min-width: 0;
+  min-height: 44px;
+  vertical-align: middle;
+  outline: 0;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.vvj-pattern.vvjp .vvj-link a:focus-visible { outline: 3px solid var(--vvjp-focus); outline-offset: 3px; }
+.vvj-pattern.vvjp .vvj-link a::after {
+  content: "";
+  display: block;
+  flex: none;
+  width: 0.85em;
+  height: 0.85em;
+  margin: 0;
+  background: currentColor;
+  -webkit-mask: url("../svg/vvjp-pattern-arrow.svg") center / contain no-repeat;
+  mask: url("../svg/vvjp-pattern-arrow.svg") center / contain no-repeat;
+  transition: transform 0.35s var(--vvjp-ease-out);
+}
+.vvj-pattern.vvjp .vvj-link a:hover::after,
+.vvj-pattern.vvjp .vvj-link a:focus-visible::after { transform: translateX(4px); }
+
+/* Below the breakpoint: the fallback photo vvjp inserts. */
+.vvj-pattern.vvjp.vvjp-below .parallax-row { height: auto; }
+.vvj-pattern.vvjp .vvjp-fallback-img { display: block; width: 100%; max-width: 100%; height: auto; margin: 0; object-fit: cover; }
+
+@media (prefers-reduced-motion: reduce) {
+  .vvj-pattern.vvjp *,
+  .vvj-pattern.vvjp *::before,
+  .vvj-pattern.vvjp *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; }
+}

@@ -49,3 +49,47 @@ vvjp__1400:
   css:
     theme:
       css/vvjp-1400.css: { weight: 202 }
+
+# Patterns. Each depends on vvjp/vvjp so its CSS loads after the module CSS.
+vvjp-pattern-base:
+  css:
+    theme:
+      patterns/vvjp-pattern-base.css: { weight: 205 }
+  dependencies:
+    - vvjp/vvjp
+    - vvj_patterns/base
+
+pattern.horizon:
+  css:
+    theme:
+      patterns/horizon/vvjp-horizon.css: { weight: 210 }
+  dependencies:
+    - vvjp/vvjp-pattern-base
+
+pattern.skyline:
+  css:
+    theme:
+      patterns/skyline/vvjp-skyline.css: { weight: 210 }
+  dependencies:
+    - vvjp/vvjp-pattern-base
+
+pattern.showroom:
+  css:
+    theme:
+      patterns/showroom/vvjp-showroom.css: { weight: 210 }
+  dependencies:
+    - vvjp/vvjp-pattern-base
+
+pattern.shoreline:
+  css:
+    theme:
+      patterns/shoreline/vvjp-shoreline.css: { weight: 210 }
+  dependencies:
+    - vvjp/vvjp-pattern-base
+
+pattern.fieldbook:
+  css:
+    theme:
+      patterns/fieldbook/vvjp-fieldbook.css: { weight: 210 }
+  dependencies:
+    - vvjp/vvjp-pattern-base

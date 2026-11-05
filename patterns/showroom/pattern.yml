@@ -1,0 +1,21 @@
+label: 'Showroom'
+description: 'A black stage; a spotlight opens on the photo as it scrolls in, with centred thin words.'
+weight: 2
+options:
+  available_breakpoints: '768'
+  section_height:
+    value: 90
+    unit: vh
+  max_width: 640
+  parallax_speed: 0.2
+  scroll_effect: 'scale'
+  background_position: 'center'
+  bg_animation_speed: 0.1
+  bg_animation_easing: 'ease-out'
+  overlay_color: '#000000'
+  overlay_opacity: 0.4
+  over_content_only: false
+  disable_overlay: false
+  enable_css: false
+needs:
+  - 'Row style Fields. First field the image with the URL to image formatter (style vvj_wide_1600), then kicker (p.vvj-kicker), title (h3.vvj-title, not linked), summary (p.vvj-summary) and link (p.vvj-link).'

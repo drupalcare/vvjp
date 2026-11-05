@@ -1,0 +1,21 @@
+label: 'Field book'
+description: 'Framed plates that open to full bleed, with a paper caption and a plate number.'
+weight: 4
+options:
+  available_breakpoints: '992'
+  section_height:
+    value: 82
+    unit: vh
+  max_width: 360
+  parallax_speed: 0.3
+  scroll_effect: 'fade-scale'
+  background_position: 'center'
+  bg_animation_speed: 0.1
+  bg_animation_easing: 'linear'
+  overlay_color: '#f4f4f4'
+  overlay_opacity: 1.0
+  over_content_only: true
+  disable_overlay: false
+  enable_css: false
+needs:
+  - 'Row style Fields. First field the image with the URL to image formatter (style vvj_wide_1600), then kicker (p.vvj-kicker), title (h3.vvj-title, not linked), summary (p.vvj-summary) and link (p.vvj-link).'

@@ -1,0 +1,21 @@
+label: 'Skyline'
+description: 'Split rows: a dark card with an outlined number on the left, the photo settling on the right.'
+weight: 1
+options:
+  available_breakpoints: '992'
+  section_height:
+    value: 85
+    unit: vh
+  max_width: 460
+  parallax_speed: 0.25
+  scroll_effect: 'smooth'
+  background_position: 'center'
+  bg_animation_speed: 0.1
+  bg_animation_easing: 'linear'
+  overlay_color: '#111111'
+  overlay_opacity: 0.9
+  over_content_only: true
+  disable_overlay: false
+  enable_css: false
+needs:
+  - 'Row style Fields. First field the image with the URL to image formatter (style vvj_wide_1600), then kicker (p.vvj-kicker), title (h3.vvj-title, not linked), summary (p.vvj-summary) and link (p.vvj-link).'

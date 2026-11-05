@@ -30,8 +30,14 @@
   'br-' ~ breakpoints,
   vvjp_id,
 ] %}
+{# A Pattern chosen in the style settings (vvj_patterns enabled). #}
+{% set vvj_pattern = options.vvj_pattern_active|default('') %}
+{% set vvj_pattern_label = options.vvj_pattern_label|default('') %}
+{% if vvj_pattern %}
+  {% set classes = classes|merge(['vvj-pattern', vvj_pattern]) %}
+{% endif %}
 
-<vvjp-parallax {{ attributes.addClass(classes).setAttribute('id', vvjp_id) }}>
+<vvjp-parallax {{ attributes.addClass(classes).setAttribute('id', vvjp_id) }}{% if vvj_pattern and vvj_pattern_label %} role="region" aria-label="{{ vvj_pattern_label }}"{% endif %}>
   <div id="{{ parallax_inner_id }}" class="vvjp-inner">
 
     {# Loop through each row to render individual parallax sections #}

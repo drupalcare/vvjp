@@ -51,3 +51,6 @@ views.style.views_vvjp:
     over_content_only:
       type: boolean
       label: 'Apply overlay over content only'
+    vvj_pattern:
+      type: string
+      label: 'VVJ Pattern'

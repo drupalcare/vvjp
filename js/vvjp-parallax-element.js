@@ -77,8 +77,12 @@
       const scrollPosition = window.scrollY;
       const windowHeight = window.innerHeight;
       const reducedMotion = this.reducedMotion;
+      // Pattern views only: per-row scroll progress and the shared state.
+      const patterned = this.classList.contains('vvj-pattern');
+      let below = false;
+      let active = -1;
 
-      this._rows.forEach((row) => {
+      this._rows.forEach((row, rowIndex) => {
         const breakpoint = row.getAttribute('data-breakpoint') ?? 'all';
         const breakpointPx = parseInt(breakpoint, 10);
         const isMobile =
@@ -91,6 +95,10 @@
         const content = row.querySelector('.parallax-content');
 
         if (isMobile) {
+          below = true;
+          if (patterned) {
+            this._writeRowProgress(row, 1, 1);
+          }
           // Below breakpoint — bypass parallax, swap in a regular image.
           if (background) {
             background.style.display = 'none';
@@ -126,6 +134,19 @@
         const elementTop = elementRect.top + scrollPosition;
         const elementHeight = row.offsetHeight;
 
+        if (patterned) {
+          const enter = reducedMotion
+            ? 1
+            : (windowHeight - elementRect.top) / (windowHeight * 0.75);
+          const progress = reducedMotion
+            ? 1
+            : (windowHeight - elementRect.top) / (windowHeight + elementHeight);
+          this._writeRowProgress(row, enter, progress);
+          if (elementRect.top <= windowHeight / 2) {
+            active = rowIndex;
+          }
+        }
+
         const inViewport =
           scrollPosition + windowHeight > elementTop &&
           scrollPosition < elementTop + elementHeight;
@@ -148,6 +169,35 @@
           content.classList.add('visible');
         }
       });
+
+      if (patterned) {
+        this.classList.toggle('vvjp-below', below);
+        this.writeState({
+          index: Math.max(0, active),
+          total: this._rows.length,
+          items: this._rows,
+        });
+      }
+    }
+
+    /**
+     * Write `--vvjp-enter` and `--vvjp-progress` (0 to 1) on a row.
+     *
+     * Pattern views only. `enter` reaches 1 once the row's top has risen
+     * three quarters of the viewport; `progress` runs across the whole time
+     * the row is on screen.
+     *
+     * @param {HTMLElement} row
+     *   The `.parallax-row` element.
+     * @param {number} enter
+     *   Raw enter value, clamped here.
+     * @param {number} progress
+     *   Raw progress value, clamped here.
+     */
+    _writeRowProgress(row, enter, progress) {
+      const clamp = (n) => String(Math.min(1, Math.max(0, n)).toFixed(3));
+      row.style.setProperty('--vvjp-enter', clamp(enter));
+      row.style.setProperty('--vvjp-progress', clamp(progress));
     }
 
     /**
