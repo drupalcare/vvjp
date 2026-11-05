@@ -24,12 +24,12 @@
   font-family: var(--vvjp-font-ui);
 }
 .vvj-pattern.vvjp,
-.vvj-pattern.vvjp *,
-.vvj-pattern.vvjp *::before,
-.vvj-pattern.vvjp *::after { box-sizing: border-box; }
+:where(.vvj-pattern.vvjp) *,
+:where(.vvj-pattern.vvjp) *::before,
+:where(.vvj-pattern.vvjp) *::after { box-sizing: border-box; }
 
 /* Theme resets: headings, paragraphs, lists, images. */
-.vvj-pattern.vvjp :is(h1, h2, h3, h4, h5, h6, p) {
+:where(.vvj-pattern.vvjp) :is(h1, h2, h3, h4, h5, h6, p) {
   margin: 0;
   padding: 0;
   font-size: inherit;
@@ -39,8 +39,8 @@
   overflow-wrap: normal;
   word-break: normal;
 }
-.vvj-pattern.vvjp :is(ul, ol, li) { list-style: none; margin: 0; padding: 0; }
-.vvj-pattern.vvjp :is(img, svg) { display: block; max-width: 100%; height: auto; }
+:where(.vvj-pattern.vvjp) :is(ul, ol, li) { list-style: none; margin: 0; padding: 0; }
+:where(.vvj-pattern.vvjp) :is(img, svg) { display: block; max-width: 100%; height: auto; }
 
 /* Titles beat the theme's h1-h6 colour and never hyphenate. */
 .vvj-pattern.vvjp .vvj-title {
@@ -58,7 +58,7 @@
 .vvj-pattern.vvjp .parallax-row { margin: 0; }
 .vvj-pattern.vvjp .parallax-content { margin: 0; padding: 16px; border: 0; border-radius: 0; box-shadow: none; }
 .vvj-pattern.vvjp .parallax-content-inner { margin: 0; }
-.vvj-pattern.vvjp .parallax-background { background-size: cover; }
+:where(.vvj-pattern.vvjp) .parallax-background { background-size: cover; }
 
 /* Link control: full reset, then the shared shape. */
 .vvj-pattern.vvjp .vvj-link { margin: 0; padding: 0; }
@@ -107,11 +107,11 @@
 .vvj-pattern.vvjp .vvj-link a:focus-visible::after { transform: translateX(4px); }
 
 /* Below the breakpoint: the fallback photo vvjp inserts. */
-.vvj-pattern.vvjp.vvjp-below .parallax-row { height: auto; }
+:where(.vvj-pattern.vvjp.vvjp-below) .parallax-row { height: auto; }
 .vvj-pattern.vvjp .vvjp-fallback-img { display: block; width: 100%; max-width: 100%; height: auto; margin: 0; object-fit: cover; }
 
 @media (prefers-reduced-motion: reduce) {
-  .vvj-pattern.vvjp *,
-  .vvj-pattern.vvjp *::before,
-  .vvj-pattern.vvjp *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; }
+  :where(.vvj-pattern.vvjp) *,
+  :where(.vvj-pattern.vvjp) *::before,
+  :where(.vvj-pattern.vvjp) *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; }
 }

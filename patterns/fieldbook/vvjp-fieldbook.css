@@ -5,7 +5,7 @@
  * Black, white and greys only. Every selector starts at the view element.
  */
 
-.vvj-pattern.vvjp.vvj-pattern--vvjp-fieldbook {
+.vvj-pattern--vvjp-fieldbook {
   --vvj-paper: #f4f4f4;
   --vvj-paper-ink: #1c1c1c;
   --vvj-paper-muted: #4d4d4d;
@@ -14,7 +14,7 @@
   color: var(--vvj-paper-ink);
   background: var(--vvj-surface, #ffffff);
 }
-.vvj-pattern.vvjp.vvj-pattern--vvjp-fieldbook .parallax-row { counter-increment: vvjp-plate; }
+.vvj-pattern--vvjp-fieldbook .parallax-row { counter-increment: vvjp-plate; }
 .vvj-pattern.vvjp.vvj-pattern--vvjp-fieldbook:not(.vvjp-below) .parallax-row {
   --vvjp-frame: calc(1 - var(--vvjp-enter, 1));
   min-height: 600px; display: flex; align-items: flex-end; justify-content: flex-end;
@@ -37,10 +37,10 @@
 .vvj-pattern.vvjp.vvj-pattern--vvjp-fieldbook .vvj-link a { padding: 0 0 2px 0; color: var(--vvj-paper-accent); background: linear-gradient(currentColor, currentColor) 0 100% / 100% 1px no-repeat; transition: background-size 0.5s var(--vvjp-ease-io); }
 .vvj-pattern.vvjp.vvj-pattern--vvjp-fieldbook .vvj-link a:hover, .vvj-pattern.vvjp.vvj-pattern--vvjp-fieldbook .vvj-link a:focus-visible { animation: vvjp-fieldbook-redraw 0.9s var(--vvjp-ease-io) forwards; }
 @keyframes vvjp-fieldbook-redraw { from { background-size: 0 1px; } to { background-size: 100% 1px; } }
-.vvj-pattern.vvjp.vvj-pattern--vvjp-fieldbook.vvjp-below .vvjp-fallback-img { aspect-ratio: 3 / 2; }
+:where(.vvj-pattern--vvjp-fieldbook.vvjp-below) .vvjp-fallback-img { aspect-ratio: 3 / 2; }
 .vvj-pattern.vvjp.vvj-pattern--vvjp-fieldbook.vvjp-below .parallax-content { border-radius: 0; box-shadow: none; }
 .vvj-pattern.vvjp.vvj-pattern--vvjp-fieldbook.vvjp-below .parallax-row + .parallax-row { margin: 12px 0 0 0; }
 @media (prefers-reduced-motion: reduce) {
-  .vvj-pattern.vvjp.vvj-pattern--vvjp-fieldbook .parallax-row { clip-path: none !important; }
-  .vvj-pattern.vvjp.vvj-pattern--vvjp-fieldbook .vvj-link a { animation: none !important; }
+  .vvj-pattern--vvjp-fieldbook .parallax-row { clip-path: none !important; }
+  .vvj-pattern--vvjp-fieldbook :where(.vvj-link) a { animation: none !important; }
 }

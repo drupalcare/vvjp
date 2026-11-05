@@ -42,7 +42,7 @@
     font-size: 1.5em;
   }
 
-  .vvjp.br-992 .parallax-background.image-url-empty .inline-link {
+  :where(.vvjp.br-992) :where(.parallax-background.image-url-empty) .inline-link {
     display: inline;
   }
 
@@ -189,7 +189,7 @@
 }
 
 @media (max-width: 61.99875rem) {
-  .vvjp.br-992 .flipbox-item-inner > *:last-child {
+  :where(.vvjp.br-992) :where(.flipbox-item-inner) > *:last-child {
     align-self: stretch;
   }
 
@@ -200,7 +200,7 @@
     height: 100%;
   }
 
-  .vvjp.br-992 .vvjp-inner .parallax-row {
+  :where(.vvjp.br-992) :where(.vvjp-inner) .parallax-row {
     position: relative;
     height: auto !important;
   }

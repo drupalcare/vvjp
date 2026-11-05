@@ -5,7 +5,7 @@
  * Black, white and greys only. Every selector starts at the view element.
  */
 
-.vvj-pattern.vvjp.vvj-pattern--vvjp-shoreline {
+.vvj-pattern--vvjp-shoreline {
   --vvj-shore-glass: rgb(255 255 255 / 0.82);
   --vvj-shore-ink: #141414;
   --vvj-shore-muted: #474747;
@@ -15,7 +15,7 @@
   background: #e9e9e9;
 }
 .vvj-pattern.vvjp.vvj-pattern--vvjp-shoreline:not(.vvjp-below) .parallax-row { min-height: 540px; display: flex; align-items: center; padding: 0 clamp(20px, 6vw, 96px) 72px clamp(20px, 6vw, 96px); }
-.vvj-pattern.vvjp.vvj-pattern--vvjp-shoreline:not(.vvjp-below) .parallax-row:nth-child(even) { justify-content: flex-end; }
+:where(.vvj-pattern--vvjp-shoreline:not(.vvjp-below)) .parallax-row:nth-child(even) { justify-content: flex-end; }
 .vvj-pattern.vvjp.vvj-pattern--vvjp-shoreline:not(.vvjp-below) .parallax-background {
   inset: -25% 0 auto 0;
   height: 150%;
@@ -36,11 +36,11 @@
 .vvj-pattern.vvjp.vvj-pattern--vvjp-shoreline .vvj-link a { gap: 0.8rem; color: var(--vvj-shore-ink); }
 .vvj-pattern.vvjp.vvj-pattern--vvjp-shoreline .vvj-link a::after { box-sizing: content-box; width: 16px; height: 16px; padding: 12px; border-radius: 50%; background: var(--vvj-shore-accent); -webkit-mask: none; mask: none; }
 .vvj-pattern.vvjp.vvj-pattern--vvjp-shoreline .vvj-link a::before { content: ""; order: 2; width: 16px; height: 16px; margin: 0 0 0 calc(-28px - 0.8rem); padding: 0; background: var(--vvj-shore-on-accent); -webkit-mask: url("../../svg/vvjp-pattern-arrow.svg") center / contain no-repeat; mask: url("../../svg/vvjp-pattern-arrow.svg") center / contain no-repeat; position: relative; z-index: 1; transition: transform 0.35s var(--vvjp-ease-out); }
-.vvj-pattern.vvjp.vvj-pattern--vvjp-shoreline .vvj-link a::after { order: 1; }
+.vvj-pattern--vvjp-shoreline :where(.vvj-link) a::after { order: 1; }
 .vvj-pattern.vvjp.vvj-pattern--vvjp-shoreline .vvj-link a:hover::after, .vvj-pattern.vvjp.vvj-pattern--vvjp-shoreline .vvj-link a:focus-visible::after { transform: translateX(8px); }
 .vvj-pattern.vvjp.vvj-pattern--vvjp-shoreline .vvj-link a:hover::before, .vvj-pattern.vvjp.vvj-pattern--vvjp-shoreline .vvj-link a:focus-visible::before { transform: translateX(8px); }
-.vvj-pattern.vvjp.vvj-pattern--vvjp-shoreline.vvjp-below .vvjp-fallback-img { aspect-ratio: 4 / 3; }
+:where(.vvj-pattern--vvjp-shoreline.vvjp-below) .vvjp-fallback-img { aspect-ratio: 4 / 3; }
 .vvj-pattern.vvjp.vvj-pattern--vvjp-shoreline.vvjp-below .parallax-content { margin: -40px 14px 24px 14px; }
 @media (prefers-reduced-motion: reduce) {
-  .vvj-pattern.vvjp.vvj-pattern--vvjp-shoreline .parallax-background { filter: none !important; }
+  .vvj-pattern--vvjp-shoreline .parallax-background { filter: none !important; }
 }
