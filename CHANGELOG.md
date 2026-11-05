@@ -18,6 +18,7 @@ behavior key, and the mobile-bypass fallback from 1.x.
 
 ### Added
 
+- Patterns: 5 ready-made designs (Horizon, Skyline, Showroom, Shoreline, Field book) chosen in the format settings. They need the `vvj_patterns` sub-module of `drupal/vvj_core`.
 - `drupal/vvj_core` dependency (auto-installed).
 - `vvjp.install` with `vvjp_update_10001()` to auto-enable vvj_core during
   `drush updb`.
