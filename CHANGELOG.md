@@ -26,7 +26,7 @@ behavior key, and the mobile-bypass fallback from 1.x.
 
 - Patterns: 5 ready-made designs (Horizon, Skyline, Showroom, Shoreline, Field book) chosen in the format settings. They need the `vvj_patterns` sub-module of `drupal/vvj_core`.
 - Patterns: the bridge reads the shared `--vvj-theme-*` roles instead of spelling theme names.
-- Pattern theme bridges `pattern-bridge-solo` and `pattern-bridge-apex`: under Solo or APEX the Patterns take the region colours; every Pattern colour is now a token declared once in `vvjp-pattern-base.css`, with the same black-and-white look elsewhere.
+- Pattern theme bridges `pattern-bridge-solo` and `pattern-bridge-apex`: under Solo or APEX the Patterns take the region colors; every Pattern color is now a token declared once in `vvjp-pattern-base.css`, with the same black-and-white look elsewhere.
 - `drupal/vvj_core` dependency (auto-installed).
 - `vvjp.install` with `vvjp_update_10001()` to auto-enable vvj_core during
   `drush updb`.

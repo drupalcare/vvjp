@@ -2,7 +2,7 @@
  * @file
  * Shared by every vvjp Pattern: resets, titles, the link arrow, below state.
  *
- * Colours come only from the --vvj-* tokens (vvj_patterns/base) and the
+ * Colors come only from the --vvj-* tokens (vvj_patterns/base) and the
  * Pattern tokens declared once below; every selector starts at the view's own element. Defensive: every element
  * a Pattern styles is reset here with full shorthands, so a theme rule on
  * buttons, links, lists, headings or images cannot reach into a Pattern.
@@ -25,7 +25,7 @@
 }
 
 /*
- * The ONE place a vvjp Pattern colour is written. Every value is derived from
+ * The ONE place a vvjp Pattern color is written. Every value is derived from
  * the --vvj-stage-* tokens (vvj_patterns/base): a tone of N/255 is
  * color-mix(in sRGB, stage-color N/2.55%, stage-bg), which gives the same
  * black-and-white look as the old literals. The theme bridges
@@ -105,7 +105,7 @@
   height: auto;
 }
 
-/* Titles beat the theme's h1-h6 colour and never hyphenate. */
+/* Titles beat the theme's h1-h6 color and never hyphenate. */
 .vvj-pattern.vvjp .vvj-title {
   letter-spacing: normal;
   text-transform: none;
