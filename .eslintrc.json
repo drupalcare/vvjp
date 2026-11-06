@@ -26,7 +26,8 @@
       {
         "exceptMethods": [
           "_applyEffect",
-          "_extractBackgroundUrl"
+          "_extractBackgroundUrl",
+          "_writeRowProgress"
         ]
       }
     ]

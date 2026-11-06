@@ -9,7 +9,9 @@
  *
  * Below the configured breakpoint (`data-breakpoint`), the parallax
  * is bypassed: the background is hidden and a regular `<img>` is
- * inserted (matches v1 fallback behavior).
+ * inserted (matches v1 fallback behavior). A Pattern (class
+ * `vvj-pattern`) compares the breakpoint against its own width, as its
+ * `@container vvj-region` CSS does; a view without one uses the window.
  *
  * Reduced-motion users skip the scroll-tied transform entirely
  * (the element stays at offset 0).
@@ -26,7 +28,7 @@
 // phpcs:disable Squiz.WhiteSpace.OperatorSpacing
 
 ((Drupal) => {
-  const { ElementBase } = Drupal.Vvj;
+  const { ElementBase, ownWidth, watchOwnWidth } = Drupal.Vvj;
 
   class VvjpParallaxElement extends ElementBase {
     static get patternSlug() {
@@ -37,12 +39,27 @@
       super();
       this._rows = [];
       this._scrollPending = false;
+      this._patterned = false;
+      this._width = 0;
     }
 
     onHydrate() {
       this._rows = this.querySelectorAll('.parallax-row');
       if (!this._rows.length) {
         return;
+      }
+
+      // A Pattern follows the room it has (a narrow column on a wide
+      // screen stacks too); a view without a Pattern keeps the window.
+      this._patterned = this.classList.contains('vvj-pattern');
+      if (this._patterned) {
+        this._width = ownWidth(this);
+        watchOwnWidth(this, this.signal, (width) => {
+          if (width !== this._width) {
+            this._width = width;
+            this._update();
+          }
+        });
       }
 
       this._update();
@@ -72,17 +89,25 @@
      * viewport width.
      */
     _update() {
-      const viewportWidth =
-        window.innerWidth || document.documentElement.clientWidth;
+      // Pattern views only: per-row scroll progress and the shared state.
+      const patterned = this._patterned;
+      // The breakpoint compares the Pattern's own width (kept current by
+      // its ResizeObserver), else the window's.
+      const viewportWidth = patterned
+        ? this._width
+        : window.innerWidth || document.documentElement.clientWidth;
       const scrollPosition = window.scrollY;
       const windowHeight = window.innerHeight;
       const reducedMotion = this.reducedMotion;
-      // Pattern views only: per-row scroll progress and the shared state.
-      const patterned = this.classList.contains('vvj-pattern');
       let below = false;
       let active = -1;
 
-      this._rows.forEach((row, rowIndex) => {
+      // Three passes so every layout read happens after every style write
+      // and before the next one (JS-RULES.md rule 3): one layout per frame,
+      // not one per row.
+      const rows = Array.from(this._rows);
+      // Pass 1, writes: the breakpoint swap (background vs fallback img).
+      const mobile = rows.map((row) => {
         const breakpoint = row.getAttribute('data-breakpoint') ?? 'all';
         const breakpointPx = parseInt(breakpoint, 10);
         const isMobile =
@@ -95,10 +120,6 @@
         const content = row.querySelector('.parallax-content');
 
         if (isMobile) {
-          below = true;
-          if (patterned) {
-            this._writeRowProgress(row, 1, 1);
-          }
           // Below breakpoint — bypass parallax, swap in a regular image.
           if (background) {
             background.style.display = 'none';
@@ -115,7 +136,7 @@
               }
             }
           }
-          return;
+          return true;
         }
 
         // Above breakpoint — re-show background, drop the fallback img.
@@ -126,13 +147,35 @@
         if (fallback) {
           fallback.remove();
         }
+        return false;
+      });
+
+      // Pass 2, reads only: row geometry, after all pass-1 writes.
+      const rects = rows.map((row, rowIndex) =>
+        mobile[rowIndex]
+          ? null
+          : { rect: row.getBoundingClientRect(), height: row.offsetHeight },
+      );
+
+      // Pass 3, writes: progress, effect and visibility per row.
+      rows.forEach((row, rowIndex) => {
+        const background = row.querySelector('.parallax-background');
+        const content = row.querySelector('.parallax-content');
+
+        if (mobile[rowIndex]) {
+          below = true;
+          if (patterned) {
+            this._writeRowProgress(row, 1, 1);
+          }
+          return;
+        }
 
         const speed =
           parseFloat(row.getAttribute('data-parallax-speed')) || 0.5;
         const effect = row.getAttribute('data-parallax-effect') || 'translate';
-        const elementRect = row.getBoundingClientRect();
+        const elementRect = rects[rowIndex].rect;
         const elementTop = elementRect.top + scrollPosition;
-        const elementHeight = row.offsetHeight;
+        const elementHeight = rects[rowIndex].height;
 
         if (patterned) {
           const enter = reducedMotion

@@ -6,13 +6,8 @@
  */
 
 .vvj-pattern--vvjp-shoreline {
-  --vvj-shore-glass: rgb(255 255 255 / 0.82);
-  --vvj-shore-ink: #141414;
-  --vvj-shore-muted: #474747;
-  --vvj-shore-accent: #141414;
-  --vvj-shore-on-accent: #ffffff;
   color: var(--vvj-shore-ink);
-  background: #e9e9e9;
+  background: var(--vvj-shore-ground);
 }
 .vvj-pattern.vvjp.vvj-pattern--vvjp-shoreline:not(.vvjp-below) .parallax-row { min-height: 540px; display: flex; align-items: center; padding: 0 clamp(20px, 6vw, 96px) 72px clamp(20px, 6vw, 96px); }
 :where(.vvj-pattern--vvjp-shoreline:not(.vvjp-below)) .parallax-row:nth-child(even) { justify-content: flex-end; }
@@ -24,8 +19,8 @@
 .vvj-pattern.vvjp.vvj-pattern--vvjp-shoreline .parallax-content {
   z-index: 2; color: var(--vvj-shore-ink); background: var(--vvj-shore-glass);
   -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px);
-  border: 1px solid rgb(255 255 255 / 0.45); border-radius: 26px; padding: clamp(24px, 3vw, 40px);
-  box-shadow: 0 30px 60px -30px rgb(0 0 0 / 0.45);
+  border: 1px solid var(--vvj-shore-glass-line); border-radius: 26px; padding: clamp(24px, 3vw, 40px);
+  box-shadow: 0 30px 60px -30px var(--vvj-shore-shadow);
   transform-origin: 50% 100%;
 }
 .vvj-pattern.vvjp.vvj-pattern--vvjp-shoreline .parallax-content-inner { margin: 0; }

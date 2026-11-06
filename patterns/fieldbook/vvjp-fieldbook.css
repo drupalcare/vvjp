@@ -6,13 +6,9 @@
  */
 
 .vvj-pattern--vvjp-fieldbook {
-  --vvj-paper: #f4f4f4;
-  --vvj-paper-ink: #1c1c1c;
-  --vvj-paper-muted: #4d4d4d;
-  --vvj-paper-accent: #1c1c1c;
   counter-reset: vvjp-plate;
   color: var(--vvj-paper-ink);
-  background: var(--vvj-surface, #ffffff);
+  background: var(--vvj-surface);
 }
 .vvj-pattern--vvjp-fieldbook .parallax-row { counter-increment: vvjp-plate; }
 .vvj-pattern.vvjp.vvj-pattern--vvjp-fieldbook:not(.vvjp-below) .parallax-row {
@@ -22,7 +18,7 @@
   clip-path: inset(calc(var(--vvjp-frame) * 10vh) calc(var(--vvjp-frame) * 9vw) round calc(var(--vvjp-frame) * 40px));
 }
 .vvj-pattern.vvjp.vvj-pattern--vvjp-fieldbook:not(.vvjp-below) .parallax-background { inset: -15% 0 auto 0; height: 130%; }
-.vvj-pattern.vvjp.vvj-pattern--vvjp-fieldbook .parallax-content { z-index: 2; padding: 28px 30px 24px 30px; border-radius: 4px; color: var(--vvj-paper-ink); background: var(--vvj-paper); box-shadow: 0 24px 50px -24px rgb(0 0 0 / 0.5); }
+.vvj-pattern.vvjp.vvj-pattern--vvjp-fieldbook .parallax-content { z-index: 2; padding: 28px 30px 24px 30px; border-radius: 4px; color: var(--vvj-paper-ink); background: var(--vvj-paper); box-shadow: 0 24px 50px -24px var(--vvj-paper-shadow); }
 .vvj-pattern.vvjp.vvj-pattern--vvjp-fieldbook:not(.vvjp-below) .fade-scale-effect .parallax-content { transform: scale(0.94) translateY(30px) rotate(-2deg); transform-origin: 100% 100%; }
 .vvj-pattern.vvjp.vvj-pattern--vvjp-fieldbook:not(.vvjp-below) .fade-scale-effect .parallax-content.visible { transform: none; }
 .vvj-pattern.vvjp.vvj-pattern--vvjp-fieldbook .parallax-content-inner { margin: 0; }

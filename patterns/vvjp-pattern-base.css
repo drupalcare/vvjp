@@ -2,8 +2,8 @@
  * @file
  * Shared by every vvjp Pattern: resets, titles, the link arrow, below state.
  *
- * Colours come only from the --vvj-* tokens (vvj_patterns/base) and greys;
- * every selector starts at the view's own element. Defensive: every element
+ * Colours come only from the --vvj-* tokens (vvj_patterns/base) and the
+ * Pattern tokens declared once below; every selector starts at the view's own element. Defensive: every element
  * a Pattern styles is reset here with full shorthands, so a theme rule on
  * buttons, links, lists, headings or images cannot reach into a Pattern.
  * `--vvjp-enter` and `--vvjp-progress` (0 to 1) are written on each row by
@@ -16,102 +16,355 @@
   --vvjp-ease-io: var(--vvj-ease-io, cubic-bezier(0.76, 0, 0.24, 1));
   --vvjp-font-display: var(--vvj-font-display, Georgia, "Times New Roman", serif);
   --vvjp-font-ui: var(--vvj-font-ui, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif);
-  --vvjp-focus: var(--vvj-focus, #ffffff);
-  display: block;
+
   position: relative;
+  display: block;
   margin: 0;
   padding: 0;
   font-family: var(--vvjp-font-ui);
 }
+
+/*
+ * The ONE place a vvjp Pattern colour is written. Every value is derived from
+ * the --vvj-stage-* tokens (vvj_patterns/base): a tone of N/255 is
+ * color-mix(in sRGB, stage-color N/2.55%, stage-bg), which gives the same
+ * black-and-white look as the old literals. The theme bridges
+ * (bridge/vvjp-bridge-*.css) re-declare some of these for Solo and APEX.
+ * :where() keeps this at zero specificity so a bridge, loaded after, wins.
+ */
+:where(.vvj-pattern.vvjp) {
+  --vvjp-focus: var(--vvj-focus, var(--vvj-stage-color));
+
+  /* Shoreline: frosted light card, dark ink. */
+  --vvj-shore-ground: color-mix(in sRGB, var(--vvj-stage-color) 91.4%, var(--vvj-stage-bg));
+  --vvj-shore-glass: color-mix(in sRGB, var(--vvj-stage-color) 82%, transparent);
+  --vvj-shore-glass-line: color-mix(in sRGB, var(--vvj-stage-color) 45%, transparent);
+  --vvj-shore-shadow: color-mix(in sRGB, var(--vvj-stage-bg) 45%, transparent);
+  --vvj-shore-ink: color-mix(in sRGB, var(--vvj-stage-color) 8%, var(--vvj-stage-bg));
+  --vvj-shore-muted: color-mix(in sRGB, var(--vvj-stage-color) 28%, var(--vvj-stage-bg));
+  --vvj-shore-accent: var(--vvj-shore-ink);
+  --vvj-shore-on-accent: var(--vvj-stage-color);
+
+  /* Field book: light paper caption, dark ink. */
+  --vvj-paper: color-mix(in sRGB, var(--vvj-stage-color) 95.7%, var(--vvj-stage-bg));
+  --vvj-paper-ink: color-mix(in sRGB, var(--vvj-stage-color) 11%, var(--vvj-stage-bg));
+  --vvj-paper-muted: color-mix(in sRGB, var(--vvj-stage-color) 30.2%, var(--vvj-stage-bg));
+  --vvj-paper-accent: var(--vvj-paper-ink);
+  --vvj-paper-shadow: color-mix(in sRGB, var(--vvj-stage-bg) 50%, transparent);
+
+  /* Horizon: dark ground, light words. */
+  --vvj-horizon-ink: var(--vvj-stage-color);
+  --vvj-horizon-ground: color-mix(in sRGB, var(--vvj-stage-color) 4.3%, var(--vvj-stage-bg));
+  --vvj-horizon-scrim: color-mix(in sRGB, color-mix(in sRGB, var(--vvj-stage-color) 4%, var(--vvj-stage-bg)) 85%, transparent);
+  --vvj-horizon-line: color-mix(in sRGB, var(--vvj-stage-color) 60%, transparent);
+  --vvj-horizon-summary: color-mix(in sRGB, var(--vvj-stage-color) 92%, transparent);
+
+  /* Showroom: black stage, spotlight. */
+  --vvj-showroom-stage: color-mix(in sRGB, var(--vvj-stage-color) 2%, var(--vvj-stage-bg));
+  --vvj-showroom-accent: color-mix(in sRGB, var(--vvj-stage-color) 90%, var(--vvj-stage-bg));
+  --vvj-showroom-ink: color-mix(in sRGB, var(--vvj-stage-color) 96%, var(--vvj-stage-bg));
+  --vvj-showroom-summary: color-mix(in sRGB, var(--vvj-stage-color) 84%, var(--vvj-stage-bg));
+  --vvj-showroom-on-accent: color-mix(in sRGB, var(--vvj-stage-color) 4.3%, var(--vvj-stage-bg));
+  --vvj-showroom-line: color-mix(in sRGB, var(--vvj-showroom-accent) 70%, transparent);
+  --vvj-showroom-scrim: color-mix(in sRGB, var(--vvj-showroom-stage) 92%, transparent);
+
+  /* Skyline: dark card left, light words. */
+  --vvj-skyline-card: color-mix(in sRGB, var(--vvj-stage-color) 6.7%, var(--vvj-stage-bg));
+  --vvj-skyline-accent: color-mix(in sRGB, var(--vvj-stage-color) 85%, var(--vvj-stage-bg));
+  --vvj-skyline-ink: color-mix(in sRGB, var(--vvj-stage-color) 96%, var(--vvj-stage-bg));
+  --vvj-skyline-muted: color-mix(in sRGB, var(--vvj-stage-color) 78.4%, var(--vvj-stage-bg));
+  --vvj-skyline-outline: color-mix(in sRGB, var(--vvj-stage-color) 55%, transparent);
+  --vvj-skyline-rule: color-mix(in sRGB, var(--vvj-stage-color) 12%, transparent);
+}
 .vvj-pattern.vvjp,
 :where(.vvj-pattern.vvjp) *,
 :where(.vvj-pattern.vvjp) *::before,
-:where(.vvj-pattern.vvjp) *::after { box-sizing: border-box; }
+:where(.vvj-pattern.vvjp) *::after {
+  box-sizing: border-box;
+}
 
 /* Theme resets: headings, paragraphs, lists, images. */
 :where(.vvj-pattern.vvjp) :is(h1, h2, h3, h4, h5, h6, p) {
   margin: 0;
   padding: 0;
+  word-break: normal;
+  hyphens: manual;
+  color: inherit;
   font-size: inherit;
   line-height: inherit;
-  color: inherit;
-  hyphens: manual;
   overflow-wrap: normal;
-  word-break: normal;
 }
-:where(.vvj-pattern.vvjp) :is(ul, ol, li) { list-style: none; margin: 0; padding: 0; }
-:where(.vvj-pattern.vvjp) :is(img, svg) { display: block; max-width: 100%; height: auto; }
+:where(.vvj-pattern.vvjp) :is(ul, ol, li) {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+:where(.vvj-pattern.vvjp) :is(img, svg) {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
 
 /* Titles beat the theme's h1-h6 colour and never hyphenate. */
 .vvj-pattern.vvjp .vvj-title {
-  color: inherit;
-  font-weight: 600;
   letter-spacing: normal;
   text-transform: none;
-  hyphens: manual;
-  overflow-wrap: normal;
-  word-break: normal;
   text-wrap: balance;
+  word-break: normal;
+  hyphens: manual;
+  color: inherit;
+  font-weight: 600;
+  overflow-wrap: normal;
 }
 
 /* The row and its parts, cleared of vvjp.css defaults each Pattern restyles. */
-.vvj-pattern.vvjp .parallax-row { margin: 0; }
-.vvj-pattern.vvjp .parallax-content { margin: 0; padding: 16px; border: 0; border-radius: 0; box-shadow: none; }
-.vvj-pattern.vvjp .parallax-content-inner { margin: 0; }
-:where(.vvj-pattern.vvjp) .parallax-background { background-size: cover; }
-
-/* Link control: full reset, then the shared shape. */
-.vvj-pattern.vvjp .vvj-link { margin: 0; padding: 0; }
-.vvj-pattern.vvjp .vvj-link a {
-  appearance: none;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.6em;
+.vvj-pattern.vvjp .parallax-row {
   margin: 0;
-  padding: 0;
+}
+.vvj-pattern.vvjp .parallax-content {
+  margin: 0;
+  padding: 16px;
   border: 0;
   border-radius: 0;
+}
+/* Zero specificity: the scroll effects below (shadow, glow, combined) set a box-shadow and win over this reset, as they did before the breakpoint files stopped matching a Pattern. */
+:where(.vvj-pattern.vvjp) .parallax-content {
+  box-shadow: none;
+}
+.vvj-pattern.vvjp .parallax-content-inner {
+  margin: 0;
+}
+:where(.vvj-pattern.vvjp) .parallax-background {
+  background-size: cover;
+}
+
+/* The parallax geometry. The module's breakpoint files (vvjp-NNN.css, vvjp-all.css)
+   no longer match a Pattern, so what a Pattern needs from them lives here, with the
+   values those files had. Wide is the state without .vvjp-below, narrow is
+   .vvjp-below (vvjp-parallax-element.js sets it at the configured breakpoint).
+   Specificity is kept at or under 0,2,0; a Pattern rule always wins. */
+:where(.vvj-pattern.vvjp:not(.vvjp-below)) .parallax-background {
+  position: absolute;
+  top: 0;
+  inset-inline-start: 0;
+  width: 100%;
+  height: 100%;
+  will-change: transform;
+}
+:where(.vvj-pattern.vvjp:not(.vvjp-below)) .parallax-content {
+  position: relative;
+  z-index: 1;
+}
+/* Scroll effects: the same rest and shown states the module had, on the row's effect class. */
+:where(.vvj-pattern.vvjp:not(.vvjp-below) .fade-effect) .parallax-content {
+  transition:
+    opacity 0.7s cubic-bezier(0.25, 0.8, 0.5, 1),
+    transform 0.7s cubic-bezier(0.25, 0.8, 0.5, 1),
+    filter 0.7s cubic-bezier(0.25, 0.8, 0.5, 1);
+  transform: translateY(50px);
+  opacity: 0;
+  filter: blur(5px);
+}
+:where(.vvj-pattern.vvjp:not(.vvjp-below) .fade-effect) .parallax-content.visible {
+  transform: translateY(0);
+  opacity: 1;
+  filter: blur(0);
+}
+:where(.vvj-pattern.vvjp:not(.vvjp-below) .scale-effect) .parallax-content {
+  transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  transform: scale(0.8);
+}
+:where(.vvj-pattern.vvjp:not(.vvjp-below) .scale-effect) .parallax-content.visible {
+  transform: scale(1);
+}
+:where(.vvj-pattern.vvjp:not(.vvjp-below) .rotate-effect) .parallax-content {
+  transition: transform 0.7s ease-out;
+  transform: rotate(10deg) scale(0.9);
+}
+:where(.vvj-pattern.vvjp:not(.vvjp-below) .rotate-effect) .parallax-content.visible {
+  transform: rotate(0) scale(1);
+}
+:where(.vvj-pattern.vvjp:not(.vvjp-below) .fade-scale-effect) .parallax-content {
+  transition:
+    opacity 0.7s ease-in-out,
+    transform 0.7s ease-in-out;
+  transform: scale(0.8) translateY(50px) rotate(-10deg);
+  opacity: 0;
+}
+:where(.vvj-pattern.vvjp:not(.vvjp-below) .fade-scale-effect) .parallax-content.visible {
+  transform: scale(1) translateY(0) rotate(0);
+  opacity: 1;
+}
+:where(.vvj-pattern.vvjp:not(.vvjp-below) .three-d-effect) .parallax-content {
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
+  transform: perspective(600px) rotateX(15deg) translateY(50px);
+  opacity: 0;
+}
+:where(.vvj-pattern.vvjp:not(.vvjp-below) .three-d-effect) .parallax-content.visible {
+  transform: perspective(600px) rotateX(0deg) translateY(0);
+  opacity: 1;
+}
+:where(.vvj-pattern.vvjp:not(.vvjp-below) .shadow-effect) .parallax-content {
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease,
+    box-shadow 0.5s ease;
+  transform: translateY(50px);
+  opacity: 0;
+  box-shadow: 0 10px 20px rgb(0, 0, 0, 0.3);
+}
+:where(.vvj-pattern.vvjp:not(.vvjp-below) .shadow-effect) .parallax-content.visible {
+  transform: translateY(0);
+  opacity: 1;
+  box-shadow: 0 4px 10px rgb(0, 0, 0, 0.1);
+}
+:where(.vvj-pattern.vvjp:not(.vvjp-below) .glow-effect) .parallax-content {
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease,
+    box-shadow 0.5s ease;
+  transform: translateY(50px);
+  opacity: 0;
+  box-shadow: 0 0 10px rgb(255, 255, 255, 0.5);
+}
+:where(.vvj-pattern.vvjp:not(.vvjp-below) .glow-effect) .parallax-content.visible {
+  transform: translateY(0);
+  opacity: 1;
+  box-shadow: 0 0 20px rgb(255, 255, 255, 0.8);
+}
+:where(.vvj-pattern.vvjp:not(.vvjp-below) .smooth-effect) .parallax-content {
+  transition:
+    opacity 0.7s cubic-bezier(0.25, 0.8, 0.5, 1),
+    transform 0.7s cubic-bezier(0.25, 0.8, 0.5, 1);
+  transform: translateY(50px);
+  opacity: 0;
+}
+:where(.vvj-pattern.vvjp:not(.vvjp-below) .smooth-effect) .parallax-content.visible {
+  transform: translateY(0);
+  opacity: 1;
+}
+:where(.vvj-pattern.vvjp:not(.vvjp-below) .hover-effect) .parallax-content {
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
+  transform: translateY(50px);
+  opacity: 0;
+}
+:where(.vvj-pattern.vvjp:not(.vvjp-below) .hover-effect) .parallax-content.visible {
+  transform: translateY(0);
+  opacity: 1;
+}
+:where(.vvj-pattern.vvjp:not(.vvjp-below) .hover-effect) .parallax-content:hover {
+  transition: transform 0.3s ease;
+  transform: translateY(-10px) scale(1.05);
+}
+:where(.vvj-pattern.vvjp:not(.vvjp-below) .hover-effect .parallax-content:hover)::after {
+  position: absolute;
+  content: "";
+  inset: -12px;
+}
+:where(.vvj-pattern.vvjp:not(.vvjp-below) .combined-effect) .parallax-content {
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease,
+    box-shadow 0.5s ease;
+  transform: translateY(50px) rotate(-10deg);
+  opacity: 0;
+  box-shadow: 0 8px 15px rgb(0, 0, 0, 0.2);
+}
+:where(.vvj-pattern.vvjp:not(.vvjp-below) .combined-effect) .parallax-content.visible {
+  transform: translateY(0) rotate(0deg);
+  opacity: 1;
+  box-shadow: 0 4px 10px rgb(0, 0, 0, 0.1);
+}
+/* Narrow: the rows sit in a two-row grid and the photo is gone (the script swaps in the fallback image). */
+:where(.vvj-pattern.vvjp.vvjp-below) .vvjp-inner {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  grid-template-columns: 1fr;
+  height: 100%;
+}
+:where(.vvj-pattern.vvjp.vvjp-below) .parallax-background {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+/* Link control: full reset, then the shared shape. */
+.vvj-pattern.vvjp .vvj-link {
+  margin: 0;
+  padding: 0;
+}
+.vvj-pattern.vvjp .vvj-link a {
+  display: inline-flex;
+  align-items: center;
+  width: auto;
+  min-width: 0;
+  height: auto;
+  min-height: 44px;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  text-align: start;
+  vertical-align: middle;
+  text-decoration: none;
+  letter-spacing: normal;
+  text-transform: none;
+  color: inherit;
+  border: 0;
+  border-radius: 0;
+  outline: 0;
   background: none;
   box-shadow: none;
-  color: inherit;
   font: inherit;
   font-weight: 600;
   line-height: 1.2;
-  letter-spacing: normal;
-  text-transform: none;
-  text-decoration: none;
-  text-align: start;
-  width: auto;
-  height: auto;
-  min-width: 0;
-  min-height: 44px;
-  vertical-align: middle;
-  outline: 0;
-  cursor: pointer;
+  appearance: none;
+  gap: 0.6em;
   -webkit-tap-highlight-color: transparent;
 }
-.vvj-pattern.vvjp .vvj-link a:focus-visible { outline: 3px solid var(--vvjp-focus); outline-offset: 3px; }
+.vvj-pattern.vvjp .vvj-link a:focus-visible {
+  outline: 3px solid var(--vvjp-focus);
+  outline-offset: 3px;
+}
 .vvj-pattern.vvjp .vvj-link a::after {
-  content: "";
   display: block;
   flex: none;
   width: 0.85em;
   height: 0.85em;
   margin: 0;
+  content: "";
+  transition: transform 0.35s var(--vvjp-ease-out);
   background: currentColor;
   -webkit-mask: url("../svg/vvjp-pattern-arrow.svg") center / contain no-repeat;
   mask: url("../svg/vvjp-pattern-arrow.svg") center / contain no-repeat;
-  transition: transform 0.35s var(--vvjp-ease-out);
 }
 .vvj-pattern.vvjp .vvj-link a:hover::after,
-.vvj-pattern.vvjp .vvj-link a:focus-visible::after { transform: translateX(4px); }
+.vvj-pattern.vvjp .vvj-link a:focus-visible::after {
+  transform: translateX(4px);
+}
 
 /* Below the breakpoint: the fallback photo vvjp inserts. */
-:where(.vvj-pattern.vvjp.vvjp-below) .parallax-row { height: auto; }
-.vvj-pattern.vvjp .vvjp-fallback-img { display: block; width: 100%; max-width: 100%; height: auto; margin: 0; object-fit: cover; }
+:where(.vvj-pattern.vvjp.vvjp-below) .parallax-row {
+  height: auto;
+}
+.vvj-pattern.vvjp .vvjp-fallback-img {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  margin: 0;
+  object-fit: cover;
+}
 
 @media (prefers-reduced-motion: reduce) {
   :where(.vvj-pattern.vvjp) *,
   :where(.vvj-pattern.vvjp) *::before,
-  :where(.vvj-pattern.vvjp) *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; }
+  :where(.vvj-pattern.vvjp) *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
 }

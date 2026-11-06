@@ -6,8 +6,6 @@
  */
 
 .vvj-pattern--vvjp-horizon {
-  --vvj-horizon-ink: #ffffff;
-  --vvj-horizon-ground: #0b0b0b;
   color: var(--vvj-horizon-ink);
   background: var(--vvj-horizon-ground);
 }
@@ -19,16 +17,18 @@
 }
 :where(.vvj-pattern--vvjp-horizon:not(.vvjp-below)) .parallax-row::after {
   content: ""; position: absolute; inset: 0; pointer-events: none;
-  background: linear-gradient(180deg, rgb(10 10 10 / 0) 30%, rgb(10 10 10 / 0.85) 100%);
+  background: linear-gradient(180deg, transparent 30%, var(--vvj-horizon-scrim) 100%);
 }
+/* Scrim anchored under the words (4.5:1 for the small text on the lightest photo); the photo itself stays as it is. */
+:where(.vvj-pattern--vvjp-horizon:not(.vvjp-below)) .parallax-content::before { content: ""; position: absolute; inset: -60% 0 0; z-index: -1; pointer-events: none; background: linear-gradient(0deg, color-mix(in sRGB, var(--vvj-horizon-ground) 78%, transparent) 70%, transparent 100%); }
 .vvj-pattern.vvjp.vvj-pattern--vvjp-horizon .parallax-content { z-index: 2; width: 100%; padding: 0 clamp(20px, 5vw, 72px) clamp(56px, 10vh, 112px) clamp(20px, 5vw, 72px); background: none; }
 .vvj-pattern.vvjp.vvj-pattern--vvjp-horizon .parallax-content-inner { max-width: 62rem; margin: 0; }
 .vvj-pattern.vvjp.vvj-pattern--vvjp-horizon .vvj-kicker {
-  display: inline-block; margin: 0 0 1.1rem 0; padding: 0.45em 0.9em; border: 1px solid rgb(255 255 255 / 0.6); border-radius: 999px;
+  display: inline-block; margin: 0 0 1.1rem 0; padding: 0.45em 0.9em; border: 1px solid var(--vvj-horizon-line); border-radius: 999px;
   font-size: 0.8rem; font-weight: 700; line-height: 1.2; letter-spacing: 0.14em; text-transform: uppercase;
 }
 .vvj-pattern.vvjp.vvj-pattern--vvjp-horizon .vvj-title { margin: 0; max-width: 14ch; font-family: var(--vvjp-font-display); font-size: clamp(2.6rem, 7.4vw, 7.25rem); line-height: 0.95; letter-spacing: -0.02em; }
-.vvj-pattern.vvjp.vvj-pattern--vvjp-horizon .vvj-summary { margin: 1.2rem 0 0 0; max-width: 34rem; font-size: clamp(1rem, 1.3vw, 1.15rem); line-height: 1.55; color: rgb(255 255 255 / 0.92); }
+.vvj-pattern.vvjp.vvj-pattern--vvjp-horizon .vvj-summary { margin: 1.2rem 0 0 0; max-width: 34rem; font-size: clamp(1rem, 1.3vw, 1.15rem); line-height: 1.55; color: var(--vvj-horizon-summary); }
 .vvj-pattern.vvjp.vvj-pattern--vvjp-horizon .vvj-link { margin: 0.6rem 0 0 0; }
 .vvj-pattern.vvjp.vvj-pattern--vvjp-horizon .vvj-link a { padding: 0 0 3px 0; background: linear-gradient(currentColor, currentColor) 0 100% / 0 2px no-repeat; transition: background-size 0.45s var(--vvjp-ease-out); }
 .vvj-pattern.vvjp.vvj-pattern--vvjp-horizon .vvj-link a:hover, .vvj-pattern.vvjp.vvj-pattern--vvjp-horizon .vvj-link a:focus-visible { background-size: 100% 2px; }

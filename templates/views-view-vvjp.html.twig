@@ -37,7 +37,11 @@
   {% set classes = classes|merge(['vvj-pattern', vvj_pattern]) %}
 {% endif %}
 
-<vvjp-parallax {{ attributes.addClass(classes).setAttribute('id', vvjp_id) }}{% if vvj_pattern and vvj_pattern_label %} role="region" aria-label="{{ vvj_pattern_label }}"{% endif %}>
+<vvjp-parallax {{ attributes.addClass(classes).setAttribute('id', vvjp_id) }}{% if vvj_pattern and vvj_pattern_label %} role="region" aria-labelledby="{{ vvjp_id }}-label"{% endif %}>
+  {% if vvj_pattern and vvj_pattern_label %}
+    {# The region's name, and the h2 level the row titles (h3) sit under. #}
+    <h2 id="{{ vvjp_id }}-label" class="visually-hidden">{{ vvj_pattern_label }}</h2>
+  {% endif %}
   <div id="{{ parallax_inner_id }}" class="vvjp-inner">
 
     {# Loop through each row to render individual parallax sections #}

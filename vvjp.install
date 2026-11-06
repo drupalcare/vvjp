@@ -55,7 +55,7 @@ function vvjp_update_10001(): string {
 }
 
 /**
- * Normalise `available_breakpoints` from a one-item list to a string.
+ * Normalize `available_breakpoints` from a one-item list to a string.
  *
  * WHAT WAS WRONG. `available_breakpoints` is a single `#type => select`, so
  * the form has always produced a STRING. The schema shipped in 2.0.0 declared
@@ -143,7 +143,7 @@ function vvjp_update_10002(): string {
   }
 
   return sprintf(
-    'Normalised available_breakpoints to a string in %d view(s): %s.',
+    'Normalized available_breakpoints to a string in %d view(s): %s.',
     count($fixed),
     implode(', ', $fixed),
   );
