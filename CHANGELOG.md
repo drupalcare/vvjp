@@ -12,6 +12,7 @@ behavior key, and the mobile-bypass fallback from 1.x.
 
 ### Fixed
 
+- Help page: follows the drupal.org help text standard (translatable About and Uses sections) instead of printing README.md as raw text.
 - Patterns: under Solo and APEX, the muted words on the shore and paper grounds use 88% of the text color (was 70%), so they keep a 4.5:1 contrast.
 - Patterns: the below-breakpoint state (`.vvjp-below` and the fallback image) now follows the Pattern's own width (a ResizeObserver on the element) instead of the window. Views without a Pattern still use the window width.
 - A Pattern no longer takes layout from the module's breakpoint files: their rules now skip any element with `vvj-pattern` (same specificity, classic rendering unchanged), and what a Pattern needs from them (photo and content position, the scroll effects, the narrow grid) lives in `vvjp-pattern-base.css` with the same values, split by `.vvjp-below`.
