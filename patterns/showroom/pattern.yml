@@ -1,5 +1,5 @@
 label: 'Showroom'
-description: 'A black stage; a spotlight opens on the photo as it scrolls in, with centred thin words.'
+description: 'A black stage; a spotlight opens on the photo as it scrolls in, with centered thin words.'
 weight: 2
 options:
   available_breakpoints: '768'

@@ -2,7 +2,7 @@
 
 /**
  * @file
- * VVJP — Views Vanilla Javascript Parallax bootstrap.
+ * VVJP — Views Vanilla JavaScript Parallax bootstrap.
  *
  * Hooks live as OOP `#[Hook]` attribute classes under `src/Hook/`.
  *

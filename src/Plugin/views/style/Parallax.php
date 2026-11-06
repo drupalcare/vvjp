@@ -115,13 +115,13 @@ class Parallax extends VvjStylePluginBase {
   protected function buildResponsiveSection(array &$form): void {
     $form['responsive'] = [
       '#type' => 'details',
-      '#title' => $this->t('Responsive Settings'),
+      '#title' => $this->t('Responsive settings'),
       '#open' => TRUE,
       '#weight' => -40,
     ];
     $form['responsive']['available_breakpoints'] = [
       '#type' => 'select',
-      '#title' => $this->t('Available Breakpoints for Parallax'),
+      '#title' => $this->t('Available breakpoints for parallax'),
       '#options' => [
         VvjpConstants::BREAKPOINT_ALL => $this->t('Active on all screens'),
         '576' => $this->t('576 px / 36 rem'),
@@ -159,14 +159,14 @@ class Parallax extends VvjStylePluginBase {
 
     $form['dimensions']['section_height'] = [
       '#type' => 'fieldset',
-      '#title' => $this->t('Section Height'),
+      '#title' => $this->t('Section height'),
       '#description' => $this->t('Define the height of the parallax section by entering a value and selecting a unit.'),
       '#attributes' => ['class' => ['section-height-wrapper']],
     ];
 
     $form['dimensions']['section_height']['value'] = [
       '#type' => 'number',
-      '#title' => $this->t('Height Value'),
+      '#title' => $this->t('Height value'),
       '#default_value' => $section_height['value'] ?? VvjpConstants::DEFAULT_HEIGHT_VALUE,
       '#description' => $this->t('Enter the numeric value for the height.'),
       '#attributes' => ['style' => 'width: 150px; display: inline-block;'],
@@ -199,7 +199,7 @@ class Parallax extends VvjStylePluginBase {
 
     $form['dimensions']['max_width'] = [
       '#type' => 'number',
-      '#title' => $this->t('Max Width (px)'),
+      '#title' => $this->t('Max width (px)'),
       '#default_value' => $this->options['max_width'],
       '#description' => $this->t('Defines the maximum width for the parallax content or insert zero allows it to stretch to 100 percent.'),
       '#step' => 1,
@@ -216,13 +216,13 @@ class Parallax extends VvjStylePluginBase {
   protected function buildParallaxSection(array &$form): void {
     $form['parallax'] = [
       '#type' => 'details',
-      '#title' => $this->t('Parallax Settings'),
+      '#title' => $this->t('Parallax settings'),
       '#open' => TRUE,
       '#weight' => -20,
     ];
     $form['parallax']['parallax_speed'] = [
       '#type' => 'number',
-      '#title' => $this->t('Parallax Speed'),
+      '#title' => $this->t('Parallax speed'),
       '#default_value' => $this->options['parallax_speed'],
       '#description' => $this->t('Set the speed of the parallax effect (e.g., 0.1 for slow, 2 for fast). Range: @min - @max.', [
         '@min' => VvjpConstants::MIN_PARALLAX_SPEED,
@@ -243,14 +243,14 @@ class Parallax extends VvjStylePluginBase {
   protected function buildBackgroundSection(array &$form): void {
     $form['background'] = [
       '#type' => 'details',
-      '#title' => $this->t('Background Settings'),
+      '#title' => $this->t('Background settings'),
       '#open' => FALSE,
       '#weight' => -10,
     ];
 
     $form['background']['background_position'] = [
       '#type' => 'select',
-      '#title' => $this->t('Background Position'),
+      '#title' => $this->t('Background position'),
       '#options' => [
         VvjpConstants::BG_POSITION_CENTER => $this->t('Center'),
         VvjpConstants::BG_POSITION_TOP => $this->t('Top'),
@@ -277,7 +277,7 @@ class Parallax extends VvjStylePluginBase {
 
     $form['background']['bg_animation_speed'] = [
       '#type' => 'number',
-      '#title' => $this->t('Background Animation Speed'),
+      '#title' => $this->t('Background animation speed'),
       '#default_value' => $this->options['bg_animation_speed'],
       '#description' => $this->t('Set the speed of the Background Animation Speed (e.g., 0.1 for slow, 2 for fast). Range: @min - @max.', [
         '@min' => VvjpConstants::MIN_PARALLAX_SPEED,
@@ -290,7 +290,7 @@ class Parallax extends VvjStylePluginBase {
 
     $form['background']['bg_animation_easing'] = [
       '#type' => 'select',
-      '#title' => $this->t('Background Animation Easing'),
+      '#title' => $this->t('Background animation easing'),
       '#options' => [
         VvjpConstants::EASING_EASE => $this->t('Ease'),
         VvjpConstants::EASING_EASE_IN => $this->t('Ease-In'),
@@ -312,13 +312,13 @@ class Parallax extends VvjStylePluginBase {
   protected function buildEffectsSection(array &$form): void {
     $form['effects'] = [
       '#type' => 'details',
-      '#title' => $this->t('Scroll Effects'),
+      '#title' => $this->t('Scroll effects'),
       '#open' => FALSE,
       '#weight' => 0,
     ];
     $form['effects']['scroll_effect'] = [
       '#type' => 'select',
-      '#title' => $this->t('Scroll Effect'),
+      '#title' => $this->t('Scroll effect'),
       '#options' => [
         VvjpConstants::SCROLL_EFFECT_NONE => $this->t('None'),
         VvjpConstants::SCROLL_EFFECT_FADE => $this->t('Fade In'),
@@ -346,14 +346,14 @@ class Parallax extends VvjStylePluginBase {
   protected function buildOverlaySection(array &$form): void {
     $form['overlay'] = [
       '#type' => 'details',
-      '#title' => $this->t('Overlay Settings'),
+      '#title' => $this->t('Overlay settings'),
       '#open' => FALSE,
       '#weight' => 10,
     ];
 
     $form['overlay']['overlay_color'] = [
       '#type' => 'color',
-      '#title' => $this->t('Overlay Color'),
+      '#title' => $this->t('Overlay color'),
       '#default_value' => $this->options['overlay_color'],
       '#description' => $this->t('Choose a color overlay for the parallax background.'),
     ];
@@ -363,7 +363,7 @@ class Parallax extends VvjStylePluginBase {
       ? (string) $overlay_opacity : '';
     $form['overlay']['overlay_opacity'] = [
       '#type' => 'range',
-      '#title' => $this->t('Overlay Opacity'),
+      '#title' => $this->t('Overlay opacity'),
       '#default_value' => $this->options['overlay_opacity'],
       '#min' => VvjpConstants::MIN_OVERLAY_OPACITY,
       '#max' => VvjpConstants::MAX_OVERLAY_OPACITY,
@@ -377,14 +377,14 @@ class Parallax extends VvjStylePluginBase {
 
     $form['overlay']['over_content_only'] = [
       '#type' => 'checkbox',
-      '#title' => $this->t('Apply Overlay Background Under Content Only'),
+      '#title' => $this->t('Apply overlay background under content only'),
       '#default_value' => $this->options['over_content_only'],
       '#description' => $this->t('Enable this option to apply the overlay background color only beneath the parallax content, rather than covering the entire row.'),
     ];
 
     $form['overlay']['disable_overlay'] = [
       '#type' => 'checkbox',
-      '#title' => $this->t('Disable Overlay Color'),
+      '#title' => $this->t('Disable overlay color'),
       '#default_value' => $this->options['disable_overlay'],
       '#description' => $this->t('Check this to disable overlay color completely.'),
     ];
