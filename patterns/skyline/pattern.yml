@@ -1,6 +1,10 @@
 label: 'Skyline'
 description: 'Split rows: a dark card with an outlined number on the left, the photo settling on the right.'
 weight: 1
+stage: open
+ground: dark
+placement: neither
+serves: [corporate, government, saas]
 options:
   available_breakpoints: '992'
   section_height:

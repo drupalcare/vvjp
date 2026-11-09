@@ -1,6 +1,10 @@
 label: 'Horizon'
 description: 'Full-height chapters; the photo rises in behind a slanted line and a huge title sits bottom left.'
 weight: 0
+stage: open
+ground: dark
+placement: neither
+serves: [nonprofit, events, cultural]
 options:
   available_breakpoints: '768'
   section_height:

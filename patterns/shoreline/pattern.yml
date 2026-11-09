@@ -1,6 +1,10 @@
 label: 'Shoreline'
 description: 'Photos pull into focus; a frosted card alternates left and right.'
 weight: 3
+stage: open
+ground: light
+placement: neither
+serves: [healthcare, nonprofit, cultural]
 options:
   available_breakpoints: '768'
   section_height:

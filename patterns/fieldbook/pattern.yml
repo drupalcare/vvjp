@@ -1,6 +1,10 @@
 label: 'Field book'
 description: 'Framed plates that open to full bleed, with a paper caption and a plate number.'
 weight: 4
+stage: open
+ground: light
+placement: neither
+serves: [cultural, publication, nonprofit]
 options:
   available_breakpoints: '992'
   section_height:

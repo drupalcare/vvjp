@@ -123,7 +123,7 @@
 }
 .vvj-pattern.vvjp .parallax-content {
   margin: 0;
-  padding: 16px;
+  padding: var(--vvj-space-16, 16px);
   border: 0;
   border-radius: 0;
 }
@@ -158,9 +158,9 @@
 /* Scroll effects: the same rest and shown states the module had, on the row's effect class. */
 :where(.vvj-pattern.vvjp:not(.vvjp-below) .fade-effect) .parallax-content {
   transition:
-    opacity 0.7s cubic-bezier(0.25, 0.8, 0.5, 1),
-    transform 0.7s cubic-bezier(0.25, 0.8, 0.5, 1),
-    filter 0.7s cubic-bezier(0.25, 0.8, 0.5, 1);
+    opacity var(--vvj-dur-700, 0.7s) var(--vvj-ease-lift, cubic-bezier(0.25, 0.8, 0.5, 1)),
+    transform var(--vvj-dur-700, 0.7s) var(--vvj-ease-lift, cubic-bezier(0.25, 0.8, 0.5, 1)),
+    filter var(--vvj-dur-700, 0.7s) var(--vvj-ease-lift, cubic-bezier(0.25, 0.8, 0.5, 1));
   transform: translateY(50px);
   opacity: 0;
   filter: blur(5px);
@@ -171,14 +171,14 @@
   filter: blur(0);
 }
 :where(.vvj-pattern.vvjp:not(.vvjp-below) .scale-effect) .parallax-content {
-  transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+  transition: transform var(--vvj-dur-500, 0.5s) var(--vvj-ease-back, cubic-bezier(0.68, -0.55, 0.27, 1.55));
   transform: scale(0.8);
 }
 :where(.vvj-pattern.vvjp:not(.vvjp-below) .scale-effect) .parallax-content.visible {
   transform: scale(1);
 }
 :where(.vvj-pattern.vvjp:not(.vvjp-below) .rotate-effect) .parallax-content {
-  transition: transform 0.7s ease-out;
+  transition: transform var(--vvj-dur-700, 0.7s) var(--vvj-ease-plain-out, ease-out);
   transform: rotate(10deg) scale(0.9);
 }
 :where(.vvj-pattern.vvjp:not(.vvjp-below) .rotate-effect) .parallax-content.visible {
@@ -186,8 +186,8 @@
 }
 :where(.vvj-pattern.vvjp:not(.vvjp-below) .fade-scale-effect) .parallax-content {
   transition:
-    opacity 0.7s ease-in-out,
-    transform 0.7s ease-in-out;
+    opacity var(--vvj-dur-700, 0.7s) var(--vvj-ease-plain-io, ease-in-out),
+    transform var(--vvj-dur-700, 0.7s) var(--vvj-ease-plain-io, ease-in-out);
   transform: scale(0.8) translateY(50px) rotate(-10deg);
   opacity: 0;
 }
@@ -197,8 +197,8 @@
 }
 :where(.vvj-pattern.vvjp:not(.vvjp-below) .three-d-effect) .parallax-content {
   transition:
-    opacity 0.5s ease,
-    transform 0.5s ease;
+    opacity var(--vvj-dur-500, 0.5s) var(--vvj-ease-plain, ease),
+    transform var(--vvj-dur-500, 0.5s) var(--vvj-ease-plain, ease);
   transform: perspective(600px) rotateX(15deg) translateY(50px);
   opacity: 0;
 }
@@ -208,36 +208,36 @@
 }
 :where(.vvj-pattern.vvjp:not(.vvjp-below) .shadow-effect) .parallax-content {
   transition:
-    opacity 0.5s ease,
-    transform 0.5s ease,
-    box-shadow 0.5s ease;
+    opacity var(--vvj-dur-500, 0.5s) var(--vvj-ease-plain, ease),
+    transform var(--vvj-dur-500, 0.5s) var(--vvj-ease-plain, ease),
+    box-shadow var(--vvj-dur-500, 0.5s) var(--vvj-ease-plain, ease);
   transform: translateY(50px);
   opacity: 0;
-  box-shadow: 0 10px 20px rgb(0, 0, 0, 0.3);
+  box-shadow: var(--vvj-shadow-lift-lg, none);
 }
 :where(.vvj-pattern.vvjp:not(.vvjp-below) .shadow-effect) .parallax-content.visible {
   transform: translateY(0);
   opacity: 1;
-  box-shadow: 0 4px 10px rgb(0, 0, 0, 0.1);
+  box-shadow: var(--vvj-shadow-lift-sm, none);
 }
 :where(.vvj-pattern.vvjp:not(.vvjp-below) .glow-effect) .parallax-content {
   transition:
-    opacity 0.5s ease,
-    transform 0.5s ease,
-    box-shadow 0.5s ease;
+    opacity var(--vvj-dur-500, 0.5s) var(--vvj-ease-plain, ease),
+    transform var(--vvj-dur-500, 0.5s) var(--vvj-ease-plain, ease),
+    box-shadow var(--vvj-dur-500, 0.5s) var(--vvj-ease-plain, ease);
   transform: translateY(50px);
   opacity: 0;
-  box-shadow: 0 0 10px rgb(255, 255, 255, 0.5);
+  box-shadow: var(--vvj-shadow-glow-sm, none);
 }
 :where(.vvj-pattern.vvjp:not(.vvjp-below) .glow-effect) .parallax-content.visible {
   transform: translateY(0);
   opacity: 1;
-  box-shadow: 0 0 20px rgb(255, 255, 255, 0.8);
+  box-shadow: var(--vvj-shadow-glow-lg, none);
 }
 :where(.vvj-pattern.vvjp:not(.vvjp-below) .smooth-effect) .parallax-content {
   transition:
-    opacity 0.7s cubic-bezier(0.25, 0.8, 0.5, 1),
-    transform 0.7s cubic-bezier(0.25, 0.8, 0.5, 1);
+    opacity var(--vvj-dur-700, 0.7s) var(--vvj-ease-lift, cubic-bezier(0.25, 0.8, 0.5, 1)),
+    transform var(--vvj-dur-700, 0.7s) var(--vvj-ease-lift, cubic-bezier(0.25, 0.8, 0.5, 1));
   transform: translateY(50px);
   opacity: 0;
 }
@@ -247,8 +247,8 @@
 }
 :where(.vvj-pattern.vvjp:not(.vvjp-below) .hover-effect) .parallax-content {
   transition:
-    opacity 0.5s ease,
-    transform 0.5s ease;
+    opacity var(--vvj-dur-500, 0.5s) var(--vvj-ease-plain, ease),
+    transform var(--vvj-dur-500, 0.5s) var(--vvj-ease-plain, ease);
   transform: translateY(50px);
   opacity: 0;
 }
@@ -257,7 +257,7 @@
   opacity: 1;
 }
 :where(.vvj-pattern.vvjp:not(.vvjp-below) .hover-effect) .parallax-content:hover {
-  transition: transform 0.3s ease;
+  transition: transform var(--vvj-dur-300, 0.3s) var(--vvj-ease-plain, ease);
   transform: translateY(-10px) scale(1.05);
 }
 :where(.vvj-pattern.vvjp:not(.vvjp-below) .hover-effect .parallax-content:hover)::after {
@@ -267,17 +267,17 @@
 }
 :where(.vvj-pattern.vvjp:not(.vvjp-below) .combined-effect) .parallax-content {
   transition:
-    opacity 0.5s ease,
-    transform 0.5s ease,
-    box-shadow 0.5s ease;
+    opacity var(--vvj-dur-500, 0.5s) var(--vvj-ease-plain, ease),
+    transform var(--vvj-dur-500, 0.5s) var(--vvj-ease-plain, ease),
+    box-shadow var(--vvj-dur-500, 0.5s) var(--vvj-ease-plain, ease);
   transform: translateY(50px) rotate(-10deg);
   opacity: 0;
-  box-shadow: 0 8px 15px rgb(0, 0, 0, 0.2);
+  box-shadow: var(--vvj-shadow-lift-md, none);
 }
 :where(.vvj-pattern.vvjp:not(.vvjp-below) .combined-effect) .parallax-content.visible {
   transform: translateY(0) rotate(0deg);
   opacity: 1;
-  box-shadow: 0 4px 10px rgb(0, 0, 0, 0.1);
+  box-shadow: var(--vvj-shadow-lift-sm, none);
 }
 /* Narrow: the rows sit in a two-row grid and the photo is gone (the script swaps in the fallback image). */
 :where(.vvj-pattern.vvjp.vvjp-below) .vvjp-inner {
@@ -336,7 +336,7 @@
   height: 0.85em;
   margin: 0;
   content: "";
-  transition: transform 0.35s var(--vvjp-ease-out);
+  transition: transform var(--vvj-dur-350, 0.35s) var(--vvjp-ease-out);
   background: currentColor;
   -webkit-mask: url("../svg/vvjp-pattern-arrow.svg") center / contain no-repeat;
   mask: url("../svg/vvjp-pattern-arrow.svg") center / contain no-repeat;

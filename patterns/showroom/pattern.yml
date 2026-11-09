@@ -1,6 +1,10 @@
 label: 'Showroom'
 description: 'A black stage; a spotlight opens on the photo as it scrolls in, with centered thin words.'
 weight: 2
+stage: open
+ground: dark
+placement: neither
+serves: [studio, creative, corporate]
 options:
   available_breakpoints: '768'
   section_height:
