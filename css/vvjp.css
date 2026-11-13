@@ -61,3 +61,20 @@
   background-position: var(--background-position);
   background-size: cover;
 }
+
+/* Reduced motion (views without a Pattern; Pattern CSS has its own guard).
+   The scroll effects move, scale, rotate and blur the content in; here it
+   simply shows. The extra classes outrank the breakpoint files' effect rules
+   (five classes, :hover included) without !important. */
+@media (prefers-reduced-motion: reduce) {
+  .vvjp.vvjp:where(:not(.vvj-pattern)) .vvjp-inner .parallax-row .parallax-content.parallax-content {
+    transition: none;
+    transform: none;
+    opacity: 1;
+    filter: none;
+  }
+
+  .vvjp:where(:not(.vvj-pattern)) .parallax-background {
+    transition: none;
+  }
+}

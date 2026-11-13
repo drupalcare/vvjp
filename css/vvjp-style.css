@@ -6,19 +6,21 @@
  * Website:      https://www.flashwebcenter.com
  * Developer:    Alaa Haddad https://www.alaahaddad.com.
  */
-.parallax-background {
+
+/* Scoped to the module wrapper; :where() keeps the old weight (0,1,0). */
+:where(.vvjp) .parallax-background {
   filter: brightness(0.9);
 }
 
-.parallax-background:hover {
+:where(.vvjp) .parallax-background:hover {
   filter: brightness(1.1);
 }
 
-.parallax-content {
+:where(.vvjp) .parallax-content {
   margin: 0 auto;
 }
 
-.parallax-content a {
+:where(.vvjp) .parallax-content a {
   transition: color 0.3s ease;
   text-decoration: underline;
 }

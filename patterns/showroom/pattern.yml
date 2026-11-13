@@ -21,5 +21,9 @@ options:
   over_content_only: false
   disable_overlay: false
   enable_css: false
+pictures:
+  vvj_image:
+    style: vvj_wide_1600
+    responsive: false
 needs:
   - 'Row style Fields. First field the image with the URL to image formatter (style vvj_wide_1600), then kicker (p.vvj-kicker), title (h3.vvj-title, not linked), summary (p.vvj-summary) and link (p.vvj-link).'

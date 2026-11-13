@@ -2,6 +2,8 @@
 
 ## [2.0.0] (UNRELEASED)
 
+- Accessibility: views without a Pattern honor reduced motion in CSS; the scroll effects (fade, scale, rotate, 3D, blur, hover lift) show the content without moving it, and the background has no transition.
+- The optional style sheet's `.parallax-background` and `.parallax-content` rules are now scoped to VVJP views, so they no longer reach other modules that use those class names.
 - Accessibility: in Windows high contrast (forced colors) the Pattern icons stay visible; they are masks painted with the text color, which the system used to replace.
 
 **Drop-in upgrade for 1.x sites.** v2 modernizes internals: extends `vvj_core`
